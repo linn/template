@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>Linn.Template</id>
+    <version>1.0.0</version>
+    <description>
+      Linn Solution Template
+    </description>
+    <authors>Linn Products</authors>
+    <packageTypes>
+      <packageType name="Template" />
+    </packageTypes>
+  </metadata>
+  <files>
+    <file src="**" exclude=".gitignore;README.md;nuget.exe;.git\**\*;**\.vs\**\*.*;**\_NCrunch_Template\**\*.*;**\node_modules\**\*.*;**\bin\**\*.*;**\obj\**\*.*"/>
+  </files>
+</package>
