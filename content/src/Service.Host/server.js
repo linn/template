@@ -7,7 +7,7 @@ new WebpackDevServer(webpack(config), {
     hot: true,
     historyApiFallback: true,
     proxy: {
-        '/boards/assets': {
+        '/template/assets': {
             target: 'http://localhost:53555',
             secure: false
         }

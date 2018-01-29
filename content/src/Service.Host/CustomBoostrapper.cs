@@ -59,8 +59,8 @@
                     builder.RegisterModule<AmazonCredentialsModule>();
                     builder.RegisterModule<AmazonSqsModule>();
                     builder.RegisterModule<LoggingModule>();
-                    //builder.RegisterModule<ServiceModule>();
-                    //builder.RegisterModule<PersistenceModule>();
+                    builder.RegisterModule<ServiceModule>();
+                    builder.RegisterModule<PersistenceModule>();
                 });
 
             base.ConfigureApplicationContainer(existingContainer);
@@ -74,8 +74,8 @@
                     builder.RegisterModule<AmazonCredentialsModule>();
                     builder.RegisterModule<AmazonSqsModule>();
                     builder.RegisterModule<LoggingModule>();
-                    //builder.RegisterModule<ServiceModule>();
-                    //builder.RegisterModule<PersistenceModule>();
+                    builder.RegisterModule<ServiceModule>();
+                    builder.RegisterModule<PersistenceModule>();
                 });
 
             base.ConfigureRequestContainer(lifetimeScope, context);
