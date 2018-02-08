@@ -1,5 +1,7 @@
 ﻿namespace Linn.Template.Messaging.Host
 {
+    using System;
+
     using Autofac;
 
     using Linn.Common.Logging;
@@ -8,16 +10,24 @@
     {
         public static void Main(string[] args)
         {
-            var container = Configuration.BuildContainer();
-            using (var scope = container.BeginLifetimeScope())
+            try
             {
-                var log = scope.Resolve<ILog>();
-                var listener = new Listener(scope, log);
-
-                while (true)
+                var container = Configuration.BuildContainer();
+                using (var scope = container.BeginLifetimeScope())
                 {
-                    listener.Listen();
+                    var log = scope.Resolve<ILog>();
+                    var listener = new Listener(scope, log);
+
+                    while (true)
+                    {
+                        listener.Listen();
+                    }
                 }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Exception: {e.Message}");
+                Environment.Exit(1);
             }
         }
     }

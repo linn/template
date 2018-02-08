@@ -1,6 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <AssemblyName>Linn.Template.Messaging.Host</AssemblyName>
     <RootNamespace>Linn.Template.Messaging.Host</RootNamespace>
@@ -9,6 +10,7 @@
   <ItemGroup>
     <PackageReference Include="Linn.Common.Logging" Version="1.1.1" />
     <PackageReference Include="Linn.Common.Messaging.RabbitMQ.Autofac" Version="1.1.2" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="2.0.0" />
   </ItemGroup>
 
   <ItemGroup>
