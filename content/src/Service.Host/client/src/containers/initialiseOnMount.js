@@ -12,6 +12,6 @@ const initialiseOnMount = ComposedComponent => class extends Component {
     render() {
         return <ComposedComponent {...this.props} />;
     }
-}
+};
 
 export default initialiseOnMount;

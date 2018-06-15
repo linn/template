@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
     <id>Linn.Template</id>
-    <version>1.0.5</version>
+    <version>1.1.0</version>
     <description>
       Linn Solution Template
     </description>
@@ -12,6 +12,6 @@
     </packageTypes>
   </metadata>
   <files>
-    <file src="**" exclude=".gitignore;README.md;nuget.exe;.git\**\*;**\.vs\**\*.*;**\_NCrunch_Template\**\*.*;**\node_modules\**\*.*;**\bin\**\*.*;**\obj\**\*.*"/>
+    <file src="**" exclude="**\node_modules\**;.gitignore;README.md;nuget.exe;.git\**\*;**\.vs\**\*.*;**\_NCrunch_Template\**\*.*;**\bin\**\*.*;**\obj\**\*.*"/>
   </files>
 </package>
