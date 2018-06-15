@@ -2,13 +2,16 @@
 const webpack = require('webpack');
 
 module.exports = {
-    entry: [
+    entry: {
+        app: [
             'babel-polyfill',
             './client/src/index.js'
         ],
+        'silent-renew': './client/silent-renew/index.js'
+    },
     output: {
         path: path.resolve(__dirname, 'client/build'), // string
-        filename: 'app.js',
+        filename: '[name].js',
         publicPath: '/template/build/'
     },
     module: {
@@ -75,12 +78,7 @@ module.exports = {
             }
         ]
     },
-    devtool: 'source-map', // enum
+    devtool: 'source-map' // enum
     // enhance debugging by adding meta info for the browser devtools
     // source-map most detailed at the expense of build speed.
-    plugins: [
-        new webpack.DefinePlugin({
-        'PROCESS.ENV': {
-        }
-    })]
 };

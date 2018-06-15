@@ -9,7 +9,7 @@
   <ItemGroup>
     <PackageReference Include="Linn.Common.Logging" Version="1.1.1" />
     <PackageReference Include="Linn.Common.Logging.AmazonSqs" Version="1.1.3" />
-    <PackageReference Include="Linn.Common.Proxy" Version="2.0.1" />
+    <PackageReference Include="Linn.Common.Proxy" Version="3.0.1" />
   </ItemGroup>
 
   <ItemGroup>

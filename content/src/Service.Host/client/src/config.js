@@ -1,6 +1,3 @@
-﻿const config = {
-    appRoot: PROCESS.ENV.appRoot ? PROCESS.ENV.appRoot : '',
-    proxyRoot: 'http://app.linn.co.uk'
-}
+﻿const config = window.APPLICATION_SETTINGS;
 
 export default config;
