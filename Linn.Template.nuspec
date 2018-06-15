@@ -12,6 +12,6 @@
     </packageTypes>
   </metadata>
   <files>
-    <file src="**" exclude=".gitignore;README.md;nuget.exe;.git\**\*;**\.vs\**\*.*;**\_NCrunch_Template\**\*.*;**\node_modules\**\*.*;**\bin\**\*.*;**\obj\**\*.*"/>
+    <file src="**" exclude="**\node_modules\**;.gitignore;README.md;nuget.exe;.git\**\*;**\.vs\**\*.*;**\_NCrunch_Template\**\*.*;**\bin\**\*.*;**\obj\**\*.*"/>
   </files>
 </package>
