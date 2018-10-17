@@ -2,7 +2,7 @@
 import { Provider } from 'react-redux';
 import { Route, Redirect } from 'react-router';
 import { OidcProvider } from 'redux-oidc';
-import { ConnectedRouter as Router } from 'react-router-redux';
+import { Router } from 'react-router-dom';
 import history from '../history';
 import Navigation from './Navigation';
 import App from './App';
