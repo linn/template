@@ -38,7 +38,6 @@
     "babel-preset-stage-0": "^6.24.1",
     "css-loader": "^0.28.11",
     "deep-freeze": "0.0.1",
-    "env-cmd": "^8.0.2",
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.9.1",
     "eslint": "^5.15.1",
