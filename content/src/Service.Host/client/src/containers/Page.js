@@ -1,6 +1,6 @@
-﻿import { connect } from 'react-redux';
+import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
-import { Breadcrumbs } from '@linn-it/linn-form-components-library';
+import { Page } from '@linn-it/linn-form-components-library';
 
 const mapStateToProps = () => ({});
 
@@ -10,5 +10,5 @@ export default withRouter(
     connect(
         mapStateToProps,
         mapDispatchToProps
-    )(Breadcrumbs)
+    )(Page)
 );
