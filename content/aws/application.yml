@@ -143,6 +143,11 @@ Resources:
         - !Sub ${TestClusterName}
         - !Sub ${ProductionClusterName}
       DesiredCount: !If [ isTesting, 1, 2]
+      PlacementStrategies:
+        - Field: attribute:ecs.availability-zone
+          Type: spread
+        - Field: instanceId
+          Type: spread
       TaskDefinition: !Ref templateTaskDefinition
       Role: ecsServiceRole
       LoadBalancers:
