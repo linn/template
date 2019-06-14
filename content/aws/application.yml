@@ -97,7 +97,7 @@ Resources:
         Image: !Sub docker.io/linn/template:${dockerTag}
         PortMappings:
         - ContainerPort: 5050
-        Memory: '250'
+        Memory: '150'
         LogConfiguration:
           LogDriver: gelf
           Options:

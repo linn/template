@@ -1,17 +1,15 @@
 ﻿import React from 'react';
 import ReactDOM from 'react-dom';
+import { AppContainer } from 'react-hot-loader';
 import configureStore from './configureStore';
 import Root from './components/Root';
-import { AppContainer } from 'react-hot-loader';
 import userManager from './helpers/userManager';
 
-import 'bootstrap/dist/css/bootstrap.css';
-import './css/index.scss';
-import '../assets/kaboom/kaboom.css';
+import 'typeface-roboto';
 
 const initialState = {};
 const store = configureStore(initialState);
-const user = store.getState().oidc.user;
+const { user } = store.getState().oidc;
 
 const render = Component => {
     ReactDOM.render(
@@ -23,7 +21,9 @@ const render = Component => {
 };
 
 if ((!user || user.expired) && window.location.pathname !== '/template/signin-oidc-client') {
-    userManager.signinRedirect({ data: { redirect: window.location.pathname + window.location.search } });
+    userManager.signinRedirect({
+        data: { redirect: window.location.pathname + window.location.search }
+    });
 } else {
     render(Root);
 

@@ -1,6 +1,8 @@
-﻿var webpack = require('webpack');
-var WebpackDevServer = require('webpack-dev-server');
-var config = require('./webpack.config');
+﻿const webpack = require('webpack');
+
+const WebpackDevServer = require('webpack-dev-server');
+
+const config = require('./webpack.config');
 
 new WebpackDevServer(webpack(config), {
     publicPath: config.output.publicPath,
@@ -8,7 +10,7 @@ new WebpackDevServer(webpack(config), {
     historyApiFallback: true,
     proxy: {
         '/template/assets': {
-            target: 'http://localhost:53555',
+            target: 'http://localhost:51101',
             secure: false
         }
     }

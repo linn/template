@@ -1,17 +1,28 @@
-﻿import React, { Component } from 'react';
-import { Grid, Row, Col } from 'react-bootstrap';
+﻿import React from 'react';
+import { Link } from 'react-router-dom';
+import { withStyles } from '@material-ui/core/styles';
+import { Paper, Typography } from '@material-ui/core';
+import PropTypes from 'prop-types';
 
-class App extends Component {
-    render() {
-        return (
-            <Grid fluid={false}>
-                <Row>
-                    <Col xs={12}>
-                    </Col>
-                </Row >
-            </Grid >
-        );
+const styles = () => ({
+    root: {
+        margin: '40px',
+        padding: '40px'
     }
-}
+});
 
-export default App;
+const App = ({ classes }) => (
+    <Paper className={classes.root}>
+        <Typography variant="h6">Template</Typography>
+    </Paper>
+);
+
+App.propTypes = {
+    classes: PropTypes.shape({})
+};
+
+App.defaultProps = {
+    classes: {}
+};
+
+export default withStyles(styles)(App);
