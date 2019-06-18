@@ -10,7 +10,6 @@ import App from './App';
 import Callback from '../containers/Callback';
 import userManager from '../helpers/userManager';
 import 'typeface-roboto';
-import NotFound from './NotFound';
 
 const Root = ({ store }) => (
     <div>
@@ -21,11 +20,7 @@ const Root = ({ store }) => (
                         <div>
                             <CssBaseline />
 
-                            <Route
-                                exact
-                                path="/"
-                                render={() => <Redirect to="/template" />}
-                            />
+                            <Route exact path="/" render={() => <Redirect to="/template" />} />
 
                             <Route
                                 path="/"
@@ -43,8 +38,6 @@ const Root = ({ store }) => (
                                     path="/template/signin-oidc-client"
                                     component={Callback}
                                 />
-
-                                <Route component={NotFound} />
                             </Switch>
                         </div>
                     </Router>
