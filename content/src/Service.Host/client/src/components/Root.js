@@ -4,6 +4,7 @@ import { Route, Redirect, Switch } from 'react-router';
 import { OidcProvider } from 'redux-oidc';
 import { Router } from 'react-router-dom';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import { MuiThemeProvider } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import history from '../history';
 import App from './App';
@@ -16,31 +17,33 @@ const Root = ({ store }) => (
         <div style={{ paddingTop: '40px' }}>
             <Provider store={store}>
                 <OidcProvider store={store} userManager={userManager}>
-                    <Router history={history}>
-                        <div>
-                            <CssBaseline />
+                    <MuiThemeProvider>
+                        <Router history={history}>
+                            <div>
+                                <CssBaseline />
 
-                            <Route exact path="/" render={() => <Redirect to="/template" />} />
-
-                            <Route
-                                path="/"
-                                render={() => {
-                                    document.title = 'Template';
-                                    return false;
-                                }}
-                            />
-
-                            <Switch>
-                                <Route exact path="/template" component={App} />
+                                <Route exact path="/" render={() => <Redirect to="/template" />} />
 
                                 <Route
-                                    exact
-                                    path="/template/signin-oidc-client"
-                                    component={Callback}
+                                    path="/"
+                                    render={() => {
+                                        document.title = 'Template';
+                                        return false;
+                                    }}
                                 />
-                            </Switch>
-                        </div>
-                    </Router>
+
+                                <Switch>
+                                    <Route exact path="/template" component={App} />
+
+                                    <Route
+                                        exact
+                                        path="/template/signin-oidc-client"
+                                        component={Callback}
+                                    />
+                                </Switch>
+                            </div>
+                        </Router>
+                    </MuiThemeProvider>
                 </OidcProvider>
             </Provider>
         </div>
