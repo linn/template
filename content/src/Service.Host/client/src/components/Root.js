@@ -6,6 +6,7 @@ import { Router } from 'react-router-dom';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { MuiThemeProvider } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
+import { Navigation } from '@linn-it/linn-form-components-library';
 import history from '../history';
 import App from './App';
 import Callback from '../containers/Callback';
@@ -20,6 +21,7 @@ const Root = ({ store }) => (
                     <MuiThemeProvider>
                         <Router history={history}>
                             <div>
+                                <Navigation />
                                 <CssBaseline />
 
                                 <Route exact path="/" render={() => <Redirect to="/template" />} />

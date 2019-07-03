@@ -1,8 +1,10 @@
 ﻿import { combineReducers } from 'redux';
 import { reducer as oidc } from 'redux-oidc';
+import { reducers as sharedLibraryReducers } from '@linn-it/linn-form-components-library';
 
-const rootReducer = combineReducers({
+const reducer = combineReducers({
+    ...sharedLibraryReducers,
     oidc
 });
 
-export default rootReducer;
+export default reducer;
