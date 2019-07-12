@@ -1,28 +1,14 @@
 ﻿import React from 'react';
 import { Link } from 'react-router-dom';
-import { withStyles } from '@material-ui/core/styles';
-import { Paper, Typography } from '@material-ui/core';
-import PropTypes from 'prop-types';
+import { Typography } from '@material-ui/core';
+import Page from '../containers/Page';
 
-const styles = () => ({
-    root: {
-        margin: '40px',
-        padding: '40px'
-    }
-});
+function App() {
+    return (
+        <Page>
+            <Typography variant="h6">Template</Typography>
+        </Page>
+    );
+}
 
-const App = ({ classes }) => (
-    <Paper className={classes.root}>
-        <Typography variant="h6">Template</Typography>
-    </Paper>
-);
-
-App.propTypes = {
-    classes: PropTypes.shape({})
-};
-
-App.defaultProps = {
-    classes: {}
-};
-
-export default withStyles(styles)(App);
+export default App;

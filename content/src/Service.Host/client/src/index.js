@@ -1,6 +1,7 @@
 ﻿import React from 'react';
 import ReactDOM from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
+import { SnackbarProvider } from 'notistack';
 import configureStore from './configureStore';
 import Root from './components/Root';
 import userManager from './helpers/userManager';
@@ -13,9 +14,11 @@ const { user } = store.getState().oidc;
 
 const render = Component => {
     ReactDOM.render(
-        <AppContainer>
-            <Component store={store} />
-        </AppContainer>,
+        <SnackbarProvider dense maxSnack={5}>
+            <AppContainer>
+                <Component store={store} />
+            </AppContainer>
+        </SnackbarProvider>,
         document.getElementById('root')
     );
 };
