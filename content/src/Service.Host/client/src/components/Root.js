@@ -4,7 +4,8 @@ import { Route, Redirect, Switch } from 'react-router';
 import { OidcProvider } from 'redux-oidc';
 import { Router } from 'react-router-dom';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import { MuiThemeProvider } from '@material-ui/core/styles';
+import { Navigation, linnTheme } from '@linn-it/linn-form-components-library';
+import { ThemeProvider } from '@material-ui/styles';
 import PropTypes from 'prop-types';
 import history from '../history';
 import App from './App';
@@ -17,9 +18,10 @@ const Root = ({ store }) => (
         <div style={{ paddingTop: '40px' }}>
             <Provider store={store}>
                 <OidcProvider store={store} userManager={userManager}>
-                    <MuiThemeProvider>
+                    <ThemeProvider theme={linnTheme}>
                         <Router history={history}>
                             <div>
+                                <Navigation />
                                 <CssBaseline />
 
                                 <Route exact path="/" render={() => <Redirect to="/template" />} />
@@ -43,7 +45,7 @@ const Root = ({ store }) => (
                                 </Switch>
                             </div>
                         </Router>
-                    </MuiThemeProvider>
+                    </ThemeProvider>
                 </OidcProvider>
             </Provider>
         </div>

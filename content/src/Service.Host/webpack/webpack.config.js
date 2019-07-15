@@ -37,10 +37,34 @@ module.exports = {
                 }
             },
             {
+                enforce: 'pre',
                 test: /\.js$/,
                 exclude: /(node_modules)/,
                 use: {
-                    loader: 'babel-loader'
+                    loader: 'eslint-loader',
+                    options: {
+                        emitWarning: true
+                    }
+                }
+            },
+            {
+                test: /\.js$/,
+                exclude: /(node_modules)/,
+                use: {
+                    loader: 'babel-loader',
+                    query: {
+                        presets: [['@babel/preset-env', { modules: false }], '@babel/react'],
+                        plugins: [
+                            'react-hot-loader/babel',
+                            '@babel/plugin-transform-object-assign',
+                            [
+                                '@babel/plugin-proposal-class-properties',
+                                {
+                                    loose: true
+                                }
+                            ]
+                        ]
+                    }
                 }
             },
             {
@@ -80,6 +104,15 @@ module.exports = {
                 }
             }
         ]
+    },
+    resolve: {
+        alias: {
+            react: path.resolve('./node_modules/react'),
+            'react-dom': path.resolve('./node_modules/react-dom'),
+            'react-redux': path.resolve('./node_modules/react-redux'),
+            notistack: path.resolve('./node_modules/notistack')
+        }
+        //modules: [path.resolve('node_modules'), 'node_modules'].concat(/* ... */)
     },
     devtool: 'source-map',
     // From https://github.com/gaearon/react-hot-boilerplate/blob/next/webpack.config.js
