@@ -6,7 +6,7 @@
   "scripts": {
     "prettier:format": "prettier --write \"{,client/src/**/}*.{md,json,js,jsx,css,scss}\"",
     "start": "node ./webpack/server.js",
-    "build": "webpack --config ./webpack.prod.config.js",
+    "build": "webpack --config ./webpack/webpack.prod.config.js",
     "test": "jest",
     "test:watch": "jest --watch",
     "eslint-check": "eslint --print-config . | eslint-config-prettier-check"
@@ -69,7 +69,7 @@
     "webpack-dev-server": "^3.3.1"
   },
   "dependencies": {
-    "@linn-it/linn-form-components-library": "^2.1.1",
+    "@linn-it/linn-form-components-library": "^4.0.2",
     "@material-ui/core": "^4.1.0",
     "@material-ui/icons": "^4.1.0",
     "@material-ui/styles": "^4.1.2",
@@ -89,6 +89,7 @@
     "redux-api-middleware": "^2.3.0",
     "redux-devtools": "^3.4.1",
     "redux-oidc": "^3.0.2",
+    "redux-thunk": "^2.3.0",
     "typeface-roboto": "0.0.54"
   }
 }
