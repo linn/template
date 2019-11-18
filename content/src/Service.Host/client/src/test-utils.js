@@ -14,15 +14,15 @@ const Providers = ({ children }) => {
     const store = mockStore({});
     return (
         <Provider store={store}>
-            <SnackbarProvider dense maxSnack={5}>
-                <MuiThemeProvider theme={createMuiTheme()}>
+            <MuiThemeProvider theme={createMuiTheme()}>
+                <SnackbarProvider dense maxSnack={5}>
                     <MemoryRouter>
                         <MuiPickersUtilsProvider utils={MomentUtils}>
                             {children}
                         </MuiPickersUtilsProvider>
                     </MemoryRouter>
-                </MuiThemeProvider>
-            </SnackbarProvider>
+                </SnackbarProvider>
+            </MuiThemeProvider>
         </Provider>
     );
 };
