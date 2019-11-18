@@ -8,6 +8,7 @@ const Callback = ({ onSuccess }) => (
     <CallbackComponent
         userManager={userManager}
         successCallback={onSuccess}
+        // eslint-disable-next-line no-console
         errorCallback={err => console.error(err)}
     >
         <Loading />

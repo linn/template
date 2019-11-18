@@ -5,8 +5,9 @@ import { SnackbarProvider } from 'notistack';
 import configureStore from './configureStore';
 import Root from './components/Root';
 import userManager from './helpers/userManager';
-
 import 'typeface-roboto';
+
+const NextRoot = require('./components/Root').default;
 
 const initialState = {};
 const store = configureStore(initialState);
@@ -34,7 +35,6 @@ if ((!user || user.expired) && window.location.pathname !== '/template/signin-oi
     if (module.hot) {
         //module.hot.accept('./reducers', () => store.replaceReducer(reducer));
         module.hot.accept('./components/Root', () => {
-            const NextRoot = require('./components/Root').default;
             render(NextRoot);
         });
     }
