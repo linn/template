@@ -67,7 +67,7 @@ module.exports = {
             }
         ]
     },
-    devtool: 'source-map' // enum
+    devtool: 'cheap-module-eval-source-map'
     // enhance debugging by adding meta info for the browser devtools
     // source-map most detailed at the expense of build speed.
 };
