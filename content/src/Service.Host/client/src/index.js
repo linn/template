@@ -2,6 +2,8 @@
 import ReactDOM from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 import { SnackbarProvider } from 'notistack';
+import { linnTheme } from '@linn-it/linn-form-components-library';
+import { ThemeProvider } from '@material-ui/styles';
 import configureStore from './configureStore';
 import Root from './components/Root';
 import userManager from './helpers/userManager';
@@ -15,11 +17,13 @@ const { user } = store.getState().oidc;
 
 const render = Component => {
     ReactDOM.render(
-        <SnackbarProvider dense maxSnack={5}>
-            <AppContainer>
-                <Component store={store} />
-            </AppContainer>
-        </SnackbarProvider>,
+        <ThemeProvider theme={linnTheme}>
+            <SnackbarProvider dense maxSnack={5}>
+                <AppContainer>
+                    <Component store={store} />
+                </AppContainer>
+            </SnackbarProvider>{' '}
+        </ThemeProvider>,
         document.getElementById('root')
     );
 };
