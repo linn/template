@@ -28,6 +28,9 @@
   },
   "author": "",
   "license": "ISC",
+  "browserslist": [
+    "defaults"
+  ],
   "devDependencies": {
     "@babel/core": "^7.7.2",
     "@babel/plugin-proposal-class-properties": "^7.7.0",
@@ -37,11 +40,11 @@
     "@babel/preset-react": "^7.7.0",
     "@testing-library/react": "^9.3.2",
     "autoprefixer": "9.7.1",
-    "babel-eslint": "^8.2.6",
-    "babel-jest": "^21.2.0",
+    "babel-eslint": "^10.0.3",
+    "babel-jest": "^24.9.0",
     "babel-loader": "^8.0.6",
     "babel-polyfill": "^6.26.0",
-    "css-loader": "^0.28.11",
+    "css-loader": "^3.2.0",
     "deep-freeze": "0.0.1",
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.9.1",
