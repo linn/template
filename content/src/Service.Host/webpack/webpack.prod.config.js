@@ -1,4 +1,5 @@
 ﻿const path = require('path');
+const MomentLocalesPlugin = require('moment-locales-webpack-plugin');
 
 module.exports = {
     entry: {
@@ -67,7 +68,11 @@ module.exports = {
             }
         ]
     },
-    devtool: 'cheap-module-eval-source-map'
+    plugins: [
+        // To strip all locales except “en”
+        new MomentLocalesPlugin()
+    ],
+    devtool: 'none'
     // enhance debugging by adding meta info for the browser devtools
     // source-map most detailed at the expense of build speed.
 };

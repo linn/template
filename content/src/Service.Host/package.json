@@ -82,6 +82,7 @@
     "history": "^4.10.1",
     "isomorphic-fetch": "^2.2.1",
     "moment": "^2.24.0",
+    "moment-locales-webpack-plugin": "^1.1.2",
     "notistack": "^0.9.6",
     "oidc-client": "^1.9.1",
     "prop-types": "^15.7.2",
