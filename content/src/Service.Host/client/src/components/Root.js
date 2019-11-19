@@ -4,8 +4,7 @@ import { Route, Redirect, Switch } from 'react-router';
 import { OidcProvider } from 'redux-oidc';
 import { Router } from 'react-router-dom';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import { Navigation, linnTheme } from '@linn-it/linn-form-components-library';
-import { ThemeProvider } from '@material-ui/styles';
+import { Navigation } from '@linn-it/linn-form-components-library';
 import PropTypes from 'prop-types';
 import history from '../history';
 import App from './App';
@@ -18,34 +17,32 @@ const Root = ({ store }) => (
         <div style={{ paddingTop: '40px' }}>
             <Provider store={store}>
                 <OidcProvider store={store} userManager={userManager}>
-                    <ThemeProvider theme={linnTheme}>
-                        <Router history={history}>
-                            <div>
-                                <Navigation />
-                                <CssBaseline />
+                    <Router history={history}>
+                        <div>
+                            <Navigation />
+                            <CssBaseline />
 
-                                <Route exact path="/" render={() => <Redirect to="/template" />} />
+                            <Route exact path="/" render={() => <Redirect to="/template" />} />
+
+                            <Route
+                                path="/"
+                                render={() => {
+                                    document.title = 'Template';
+                                    return false;
+                                }}
+                            />
+
+                            <Switch>
+                                <Route exact path="/template" component={App} />
 
                                 <Route
-                                    path="/"
-                                    render={() => {
-                                        document.title = 'Template';
-                                        return false;
-                                    }}
+                                    exact
+                                    path="/template/signin-oidc-client"
+                                    component={Callback}
                                 />
-
-                                <Switch>
-                                    <Route exact path="/template" component={App} />
-
-                                    <Route
-                                        exact
-                                        path="/template/signin-oidc-client"
-                                        component={Callback}
-                                    />
-                                </Switch>
-                            </div>
-                        </Router>
-                    </ThemeProvider>
+                            </Switch>
+                        </div>
+                    </Router>
                 </OidcProvider>
             </Provider>
         </div>

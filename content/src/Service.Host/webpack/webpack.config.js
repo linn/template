@@ -20,14 +20,7 @@ module.exports = {
     module: {
         rules: [
             {
-                exclude: [
-                    /\.html$/,
-                    /\.(js|jsx)$/,
-                    /\.css$/,
-                    /\.scss$/,
-                    /\.json$/,
-                    /\.svg$/
-                ],
+                exclude: [/\.html$/, /\.(js|jsx)$/, /\.css$/, /\.scss$/, /\.json$/, /\.svg$/],
                 use: {
                     loader: 'url-loader',
                     query: {
@@ -114,7 +107,7 @@ module.exports = {
         }
         //modules: [path.resolve('node_modules'), 'node_modules'].concat(/* ... */)
     },
-    devtool: 'source-map',
+    devtool: 'cheap-module-eval-source-map',
     // From https://github.com/gaearon/react-hot-boilerplate/blob/next/webpack.config.js
     plugins: [
         new webpack.HotModuleReplacementPlugin(), // enable HMR globally
@@ -122,7 +115,8 @@ module.exports = {
         new webpack.NoEmitOnErrorsPlugin(), // do not emit compiled assets that include errors
         new webpack.DefinePlugin({
             'PROCESS.ENV': {
-                'appRoot': JSON.stringify('http://localhost:61798')
+                appRoot: JSON.stringify('http://localhost:61798')
             }
         })
-    ]};
+    ]
+};
