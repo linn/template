@@ -13,10 +13,10 @@ else
 fi
 
 # create a docker
+docker login -u $DOCKER_HUB_USERNAME -p $DOCKER_HUB_PASSWORD
 docker build --no-cache -t linn/template:$TRAVIS_BUILD_NUMBER --build-arg gitBranch=$GIT_BRANCH ./src/Service.Host/
 docker build --no-cache -t linn/template-messaging:$TRAVIS_BUILD_NUMBER --build-arg gitBranch=$GIT_BRANCH ./src/Messaging.Host/
 
-# push to dockerhub
-docker login -u $DOCKER_HUB_USERNAME -p $DOCKER_HUB_PASSWORD 
+# push to dockerhub 
 docker push linn/template:$TRAVIS_BUILD_NUMBER
 docker push linn/template-messaging:$TRAVIS_BUILD_NUMBER
