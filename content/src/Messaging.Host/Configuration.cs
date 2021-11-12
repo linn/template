@@ -3,7 +3,7 @@
     using Autofac;
 
     using Linn.Common.Messaging.RabbitMQ.Autofac;
-    using Linn.Template.IoC;
+    using Linn.Template.Messaging.Host.IoC;
 
     public static class Configuration
     {
@@ -13,11 +13,12 @@
             builder.RegisterModule<AmazonCredentialsModule>();
             builder.RegisterModule<AmazonSqsModule>();
             builder.RegisterModule<LoggingModule>();
-            //builder.RegisterModule<MessagingModule>();
-            //builder.RegisterModule<PersistenceModule>();
-            //builder.RegisterModule<ServiceModule>();
+            builder.RegisterModule<MessagingModule>();
+            
+            // builder.RegisterModule<PersistenceModule>();
+            // builder.RegisterModule<ServiceModule>();
+            
             builder.RegisterReceiver("template.q", "template.dlx");
-
             builder.RegisterType<Listener>().AsSelf();
 
             return builder.Build();

@@ -6,6 +6,7 @@ module.exports = {
         app: ['babel-polyfill', './client/src/index.js'],
         'silent-renew': './client/silent-renew/index.js'
     },
+    mode: 'production',
     output: {
         path: path.resolve(__dirname, '../client/build'), // string
         filename: '[name].js',
@@ -13,16 +14,6 @@ module.exports = {
     },
     module: {
         rules: [
-            {
-                exclude: [/\.html$/, /\.(js|jsx)$/, /\.css$/, /\.scss$/, /\.json$/, /\.svg$/],
-                use: {
-                    loader: 'url-loader',
-                    query: {
-                        limit: 10000,
-                        name: 'media/[name].[hash:8].[ext]'
-                    }
-                }
-            },
             {
                 test: /\.js$/,
                 exclude: /(node_modules)/,
@@ -58,21 +49,13 @@ module.exports = {
                 ]
             },
             {
-                test: /\.svg$/,
-                use: {
-                    loader: 'file-loader',
-                    query: {
-                        name: 'media/[name].[hash:8].[ext]'
-                    }
-                }
+                test: /\.(jpe?g|svg|png|gif|ico|eot|ttf|woff2?)(\?v=\d+\.\d+\.\d+)?$/i,
+                type: 'asset/resource'
             }
         ]
     },
     plugins: [
         // To strip all locales except “en”
         new MomentLocalesPlugin()
-    ],
-    devtool: 'none'
-    // enhance debugging by adding meta info for the browser devtools
-    // source-map most detailed at the expense of build speed.
+    ]
 };
