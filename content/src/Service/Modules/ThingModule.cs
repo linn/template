@@ -15,13 +15,13 @@
 
     using Microsoft.AspNetCore.Http;
 
-    public class ThingsModule : CarterModule
+    public class ThingModule : CarterModule
     {
         private readonly IFacadeResourceService<Thing, int, ThingResource, ThingResource> thingFacadeService;
 
         private readonly IThingService thingService;
 
-        public ThingsModule(IFacadeResourceService<Thing, int, ThingResource, ThingResource> thingFacadeService, IThingService thingService)
+        public ThingModule(IFacadeResourceService<Thing, int, ThingResource, ThingResource> thingFacadeService, IThingService thingService)
         {
             this.thingFacadeService = thingFacadeService;
             this.thingService = thingService;
@@ -30,6 +30,7 @@
             this.Post("/template/things/{id:int}", this.DoNothing);
             this.Post("/template/things/send-message", this.SendMessage);
             this.Post("/template/things", this.CreateThing);
+            this.Put("/template/things/{id:int}", this.UpdateThing);
         }
 
         private async Task SendMessage(HttpRequest req, HttpResponse res)
@@ -62,6 +63,15 @@
         {
             var resource = await request.Bind<ThingResource>();
             var result = this.thingFacadeService.Add(resource);
+
+            await response.Negotiate(result);
+        }
+
+        private async Task UpdateThing(HttpRequest request, HttpResponse response)
+        {
+            var id = request.RouteValues.As<int>("id");
+            var resource = await request.Bind<ThingResource>();
+            var result = this.thingFacadeService.Update(id, resource);
 
             await response.Negotiate(result);
         }

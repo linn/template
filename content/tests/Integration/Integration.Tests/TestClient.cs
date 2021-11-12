@@ -5,8 +5,6 @@
 
     using Carter;
 
-    using Linn.Template.Service.Modules;
-
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
@@ -15,7 +13,7 @@
 
     public static class TestClient
     {
-        public static HttpClient With(Action<IServiceCollection> serviceConfiguration, params Func<RequestDelegate, RequestDelegate>[] middleWares)
+        public static HttpClient With<T>(Action<IServiceCollection> serviceConfiguration, params Func<RequestDelegate, RequestDelegate>[] middleWares) where T : CarterModule
         {
             var server = new TestServer(
                 new WebHostBuilder()
@@ -24,7 +22,7 @@
                         {
                             services.Apply(serviceConfiguration);
                             services.AddCarter(configurator: c =>
-                                c.WithModule<ConsignmentsModule>());
+                                c.WithModule<T>());
                         })
                     .Configure(
                         app =>
