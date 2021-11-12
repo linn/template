@@ -2,25 +2,23 @@
 {
     using FluentAssertions;
 
-    using Linn.Template.Domain.LinnApps.Consignments;
-
     using NUnit.Framework;
 
     public class WhenATestPasses
     {
-        private Hub hub;
+        private Thing thing;
 
         [SetUp]
         public void SetUp()
         {
-            this.hub = new Hub { HubId = 1, Description = "new" };
+            this.thing = new Thing { Id = 1, Name = "new" };
         }
 
         [Test]
-        public void ShouldBeAHub()
+        public void ShouldBeAThing()
         {
-            this.hub.HubId.Should().Be(1);
-            this.hub.Description.Should().Be("new");
+            this.thing.Id.Should().Be(1);
+            this.thing.Name.Should().Be("new");
         }
     }
 }

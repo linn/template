@@ -10,7 +10,6 @@
     using Linn.Common.Facade;
     using Linn.Common.Pdf;
     using Linn.Template.Domain.LinnApps;
-    using Linn.Template.Domain.LinnApps.Consignments;
     using Linn.Template.Facade.ResourceBuilders;
     using Linn.Template.Facade.Services;
     using Linn.Template.Resources;
@@ -23,9 +22,7 @@
         public static IServiceCollection AddFacade(this IServiceCollection services)
         {
             return services
-                .AddTransient<IBuilder<Hub>, HubResourceBuilder>()
                 .AddTransient<IBuilder<Thing>, ThingResourceBuilder>()
-                .AddTransient<IFacadeResourceService<Hub, int, HubResource, HubResource>, HubFacadeService>()
                 .AddTransient<IFacadeResourceService<Thing, int, ThingResource, ThingResource>, ThingFacadeService>();
         }
 

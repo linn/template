@@ -2,7 +2,6 @@
 {
     using Linn.Common.Configuration;
     using Linn.Template.Domain.LinnApps;
-    using Linn.Template.Domain.LinnApps.Consignments;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Logging;
 
@@ -11,14 +10,11 @@
         public static readonly LoggerFactory MyLoggerFactory =
             new LoggerFactory(new[] { new Microsoft.Extensions.Logging.Debug.DebugLoggerProvider() });
 
-        public DbSet<Hub> Hubs { get; set; }
-
         public DbSet<Thing> Things { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Model.AddAnnotation("MaxIdentifierLength", 30);
-            this.BuildHubs(builder);
             this.BuildThings(builder);
             this.BuildThingDetails(builder);
             this.BuildThingCodes(builder);
@@ -41,19 +37,6 @@
             optionsBuilder.UseLoggerFactory(MyLoggerFactory);
             optionsBuilder.EnableSensitiveDataLogging(true);
             base.OnConfiguring(optionsBuilder);
-        }
-
-        private void BuildHubs(ModelBuilder builder)
-        {
-            var h = builder.Entity<Hub>().ToTable("HUBS");
-            h.HasKey(a => a.HubId);
-            h.Property(a => a.HubId).HasColumnName("HUB_ID");
-            h.Property(a => a.Description).HasColumnName("DESCRIPTION").HasMaxLength(240);
-            h.Property(a => a.OrgId).HasColumnName("ORG_ID");
-            h.Property(a => a.AddressId).HasColumnName("ADDRESS_ID");
-            h.Property(a => a.CustomStamp).HasColumnName("CUSTOM_STAMP").HasMaxLength(10);
-            h.Property(a => a.CarrierCode).HasColumnName("CARRIER_CODE").HasMaxLength(10);
-            h.Property(a => a.EcHub).HasColumnName("EC_HUB").HasMaxLength(1);
         }
 
         private void BuildThings(ModelBuilder builder)

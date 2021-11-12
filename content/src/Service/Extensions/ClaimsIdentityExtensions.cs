@@ -14,7 +14,6 @@
             }
 
             return identity.Claims.Any(claim =>
-                claim != null &&
                 string.Equals(claim.Type, type, StringComparison.OrdinalIgnoreCase) &&
                 !string.IsNullOrEmpty(claim.Value));
         }
