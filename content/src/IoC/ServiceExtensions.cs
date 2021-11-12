@@ -13,7 +13,6 @@
     using Linn.Template.Facade.ResourceBuilders;
     using Linn.Template.Facade.Services;
     using Linn.Template.Resources;
-    using Linn.Template.Resources.Consignments;
 
     using Microsoft.Extensions.DependencyInjection;
 
