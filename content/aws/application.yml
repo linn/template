@@ -43,6 +43,12 @@ Parameters:
   loggingMaxInnerExceptionDepth:
     Type: Number
     Description: Logging Max Inner Exception Depth
+  smtpHostname:
+    Type: String
+    Description: SMTP Hostname
+  pdfServiceRoot:
+    Type: String
+    Description: Pdf Service API root url  
   environmentSuffix:
     Type: String
     AllowedValues:
@@ -83,6 +89,11 @@ Resources:
             - sqs:SendMessage
             Resource:
               Fn::ImportValue: logging-queue-arn
+          - Effect: Allow
+            Action:
+            - ses:SendEmail
+            - ses:SendRawEmail
+            Resource: '*'
       - PolicyName: kms
         PolicyDocument:
           Version: '2012-10-17'
@@ -146,6 +157,10 @@ Resources:
           Value: !Ref loggingEnvironment
         - Name: LOG_MAX_INNER_EXCEPTION_DEPTH
           Value: !Ref loggingMaxInnerExceptionDepth
+        - Name: SMTP_HOSTNAME
+          Value: !Ref smtpHostname
+        - Name: PDF_SERVICE_ROOT
+          Value: !Ref pdfServiceRoot
         - Name: awsRegion
           Value: !Ref AWS::Region
         - Name: KEYS_BUCKET_NAME

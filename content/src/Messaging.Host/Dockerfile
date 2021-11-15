@@ -1,5 +1,6 @@
-﻿FROM microsoft/dotnet:2.2-runtime
+﻿FROM mcr.microsoft.com/dotnet/runtime:5.0
+FROM mcr.microsoft.com/dotnet/aspnet:5.0
 
-COPY bin/release/netcoreapp2.2/publish/ /app/bin/
+COPY bin/release/net5.0/publish/ /app/bin/
 
 CMD dotnet /app/bin/Linn.Template.Messaging.Host.dll

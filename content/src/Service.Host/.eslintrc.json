@@ -1,13 +1,12 @@
 {
-    "extends": ["airbnb", "prettier/react", "plugin:jest/recommended", "prettier"],
-    "globals": { "expect": true },
+    "extends": ["airbnb", "prettier"], 
+    "globals": { "expect": true, "test": true, "jest": true },
     "plugins": ["prettier", "jest", "react-hooks"],
     "parser": "babel-eslint",
     "env": {
         "browser": true
     },
     "rules": {
-        "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
         "prettier/prettier": ["error"],
         "linebreak-style": ["error", "windows"],
         "react/jsx-filename-extension": 0,
@@ -21,6 +20,12 @@
             "rules": {
                 "no-unused-expressions": "off",
                 "jest/valid-expect": "off"
+            }
+        },
+        {
+            "files": ["*.js"],
+            "rules": {
+                "import/no-extraneous-dependencies": "off"
             }
         }
     ]

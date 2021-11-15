@@ -1,8 +1,8 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.2</TargetFramework>
-    <AssemblyName>Linn.Template.Persistence</AssemblyName>
+	<TargetFramework>net5.0</TargetFramework>
+	<AssemblyName>Linn.Template.Persistence</AssemblyName>
     <RootNamespace>Linn.Template.Persistence</RootNamespace>
   </PropertyGroup>
 

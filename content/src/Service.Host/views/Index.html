@@ -7,13 +7,7 @@
 </head>
 <body>
     <div id="root"></div>
-    <script type="text/javascript">
-        window.APPLICATION_SETTINGS = {
-            authorityUri: '@Model.AuthorityUri',
-            appRoot: '@Model.AppRoot',
-            proxyRoot: '@Model.ProxyRoot'
-        };
-    </script>
+    <script type="text/javascript">window.APPLICATION_SETTINGS = {{{Settings}}};</script>   
     <script src="/template/build/app.js"></script>
 </body>
 </html>

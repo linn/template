@@ -1,7 +1,14 @@
 ﻿const path = require('path');
 const webpack = require('webpack');
 
+function localResolve(preset) {
+    return Array.isArray(preset)
+        ? [require.resolve(preset[0]), preset[1]]
+        : require.resolve(preset);
+}
+
 module.exports = {
+    mode: 'development',
     entry: {
         app: [
             'babel-polyfill',
@@ -20,16 +27,6 @@ module.exports = {
     module: {
         rules: [
             {
-                exclude: [/\.html$/, /\.(js|jsx)$/, /\.css$/, /\.scss$/, /\.json$/, /\.svg$/],
-                use: {
-                    loader: 'url-loader',
-                    query: {
-                        limit: 10000,
-                        name: 'media/[name].[hash:8].[ext]'
-                    }
-                }
-            },
-            {
                 enforce: 'pre',
                 test: /\.js$/,
                 exclude: /(node_modules)/,
@@ -41,24 +38,18 @@ module.exports = {
                 }
             },
             {
-                test: /\.js$/,
-                exclude: /(node_modules)/,
+                test: /.js$/,
                 use: {
                     loader: 'babel-loader',
-                    query: {
-                        presets: [['@babel/preset-env', { modules: false }], '@babel/react'],
-                        plugins: [
-                            'react-hot-loader/babel',
-                            '@babel/plugin-transform-object-assign',
-                            [
-                                '@babel/plugin-proposal-class-properties',
-                                {
-                                    loose: true
-                                }
-                            ]
-                        ]
+                    options: {
+                        presets: [
+                            ['@babel/preset-env', { modules: 'commonjs' }],
+                            '@babel/preset-react'
+                        ].map(localResolve),
+                        plugins: ['@babel/plugin-transform-runtime'].map(localResolve)
                     }
-                }
+                },
+                exclude: /node_modules/
             },
             {
                 test: /\.css$/,
@@ -83,39 +74,36 @@ module.exports = {
                             importLoaders: 1
                         }
                     },
-                    'sass-loader',
+                    'fast-sass-loader',
                     'postcss-loader'
                 ]
             },
             {
-                test: /\.svg$/,
-                use: {
-                    loader: 'file-loader',
-                    query: {
-                        name: 'media/[name].[hash:8].[ext]'
-                    }
-                }
+                test: /\.(jpe?g|svg|png|gif|ico|eot|ttf|woff2?)(\?v=\d+\.\d+\.\d+)?$/i,
+                type: 'asset/resource'
             }
         ]
     },
     resolve: {
         alias: {
-            react: path.resolve('./node_modules/react'),
-            'react-dom': path.resolve('./node_modules/react-dom'),
+            '@material-ui/pickers': path.resolve('./node_modules/@material-ui/pickers'),
             'react-redux': path.resolve('./node_modules/react-redux'),
-            notistack: path.resolve('./node_modules/notistack')
+            react: path.resolve('./node_modules/react'),
+            notistack: path.resolve('./node_modules/notistack'),
+            '@material-ui/styles': path.resolve('./node_modules/@material-ui/styles')
         }
         //modules: [path.resolve('node_modules'), 'node_modules'].concat(/* ... */)
     },
-    devtool: 'cheap-module-eval-source-map',
+    optimization: {
+        moduleIds: 'named'
+    },
+    devtool: 'eval-cheap-module-source-map',
     // From https://github.com/gaearon/react-hot-boilerplate/blob/next/webpack.config.js
     plugins: [
-        new webpack.HotModuleReplacementPlugin(), // enable HMR globally
-        new webpack.NamedModulesPlugin(), // prints more readable module names in the browser console on HMR updates
         new webpack.NoEmitOnErrorsPlugin(), // do not emit compiled assets that include errors
         new webpack.DefinePlugin({
             'PROCESS.ENV': {
-                appRoot: JSON.stringify('http://localhost:61798')
+                appRoot: JSON.stringify('http://localhost:51698')
             }
         })
     ]

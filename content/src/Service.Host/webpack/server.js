@@ -1,23 +1,31 @@
 ﻿const webpack = require('webpack');
+const path = require('path');
 
-const WebpackDevServer = require('webpack-dev-server');
+const Server = require('webpack-dev-server');
 
 const config = require('./webpack.config');
 
-new WebpackDevServer(webpack(config), {
-    publicPath: config.output.publicPath,
-    hot: true,
-    historyApiFallback: true,
-    proxy: {
-        '/template/assets': {
-            target: 'http://localhost:51101',
-            secure: false
-        }
-    }
-}).listen(3000, 'localhost', function (err, result) {
-    if (err) {
-        return console.log(err);
-    }
+const devServer = new Server(
+    {
+        static: {
+            directory: path.join(__dirname, '../')
+        },
+        devMiddleware: {
+            index: true,
+            mimeTypes: { 'text/html': ['phtml'] },
+            serverSideRender: true,
+            writeToDisk: true
+        },
+        host: '127.0.0.1',
+        hot: true,
+        historyApiFallback: true,
+        port: 3000
+    },
+    webpack(config)
+);
 
-    console.log('Listening at http://localhost:3000/');
-});
+(async () => {
+    await devServer.start();
+
+    console.log('Running');
+})();
