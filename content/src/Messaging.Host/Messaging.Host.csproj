@@ -15,13 +15,13 @@
 		<PackageReference Include="RabbitMQ.Client" Version="6.4.0" />
 	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\IoC\IoC.csproj" />
-    <ProjectReference Include="..\Messaging\Messaging.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\IoC\IoC.csproj" />
+		<ProjectReference Include="..\Messaging\Messaging.csproj" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Jobs\" />
-  </ItemGroup>
+	<ItemGroup>
+		<Folder Include="Jobs\" />
+	</ItemGroup>
 
 </Project>

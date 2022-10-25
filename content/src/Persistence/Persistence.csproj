@@ -1,13 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-	<TargetFramework>net6.0</TargetFramework>
-	<AssemblyName>Linn.Template.Persistence</AssemblyName>
-    <RootNamespace>Linn.Template.Persistence</RootNamespace>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<AssemblyName>Linn.Template.Persistence</AssemblyName>
+		<RootNamespace>Linn.Template.Persistence</RootNamespace>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Domain\Domain.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Domain\Domain.csproj" />
+	</ItemGroup>
 
 </Project>

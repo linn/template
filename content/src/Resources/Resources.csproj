@@ -1,13 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-	<TargetFramework>net6.0</TargetFramework>
-    <AssemblyName>Linn.Template.Resources</AssemblyName>
-    <RootNamespace>Linn.Template.Resources</RootNamespace>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<AssemblyName>Linn.Template.Resources</AssemblyName>
+		<RootNamespace>Linn.Template.Resources</RootNamespace>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Linn.Common.Resources" Version="2.0.0" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Linn.Common.Resources" Version="2.0.0" />
+	</ItemGroup>
 
 </Project>

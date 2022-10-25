@@ -1,13 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <OutputType>Exe</OutputType>
-	<TargetFramework>net6.0</TargetFramework>
-    <AssemblyName>Linn.Template.Integration.Tests</AssemblyName>
-    <RootNamespace>Linn.Template.Integration.Tests</RootNamespace>
-  </PropertyGroup>
+	<PropertyGroup>
+		<OutputType>Exe</OutputType>
+		<TargetFramework>net6.0</TargetFramework>
+		<AssemblyName>Linn.Template.Integration.Tests</AssemblyName>
+		<RootNamespace>Linn.Template.Integration.Tests</RootNamespace>
+	</PropertyGroup>
 
-  <ItemGroup>
+	<ItemGroup>
 		<PackageReference Include="Carter" Version="6.1.1" />
 		<PackageReference Include="FluentAssertions" Version="6.7.0" />
 		<PackageReference Include="Linn.Common.Persistence" Version="3.0.0" />
@@ -22,13 +22,13 @@
 		<PackageReference Include="NSubstitute" Version="4.4.0" />
 		<PackageReference Include="nunit" Version="3.13.3" />
 		<PackageReference Include="NUnit3TestAdapter" Version="4.2.1" />
-  </ItemGroup>
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\src\Domain.LinnApps\Domain.LinnApps.csproj" />
-    <ProjectReference Include="..\..\..\src\IoC\IoC.csproj" />
-    <ProjectReference Include="..\..\..\src\Resources\Resources.csproj" />
-    <ProjectReference Include="..\..\..\src\Service\Service.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\..\..\src\Domain.LinnApps\Domain.LinnApps.csproj" />
+		<ProjectReference Include="..\..\..\src\IoC\IoC.csproj" />
+		<ProjectReference Include="..\..\..\src\Resources\Resources.csproj" />
+		<ProjectReference Include="..\..\..\src\Service\Service.csproj" />
+	</ItemGroup>
 
 </Project>

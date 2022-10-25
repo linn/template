@@ -1,22 +1,22 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-	<TargetFramework>net6.0</TargetFramework>
-    <RootNamespace>Linn.Template.Persistence.LinnApps</RootNamespace>
-    <AssemblyName>Linn.Template.Persistence.LinnApps</AssemblyName>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<RootNamespace>Linn.Template.Persistence.LinnApps</RootNamespace>
+		<AssemblyName>Linn.Template.Persistence.LinnApps</AssemblyName>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Linn.Common.Configuration" Version="2.0.0" />
-    <PackageReference Include="Linn.Common.Logging" Version="2.0.0" />
-    <PackageReference Include="Linn.Common.Persistence" Version="3.0.0" />
-    <PackageReference Include="Linn.Common.Persistence.EntityFramework" Version="3.0.1" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="6.0.0" />
-    <PackageReference Include="Oracle.EntityFrameworkCore" Version="6.21.5" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Linn.Common.Configuration" Version="2.0.0" />
+		<PackageReference Include="Linn.Common.Logging" Version="2.0.0" />
+		<PackageReference Include="Linn.Common.Persistence" Version="3.0.0" />
+		<PackageReference Include="Linn.Common.Persistence.EntityFramework" Version="3.0.1" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="6.0.0" />
+		<PackageReference Include="Oracle.EntityFrameworkCore" Version="6.21.5" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Domain.LinnApps\Domain.LinnApps.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Domain.LinnApps\Domain.LinnApps.csproj" />
+	</ItemGroup>
 
 </Project>

@@ -1,24 +1,24 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-	<TargetFramework>net6.0</TargetFramework>
-    <AssemblyName>Linn.Template.Messaging</AssemblyName>
-    <RootNamespace>Linn.Template.Messaging</RootNamespace>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<AssemblyName>Linn.Template.Messaging</AssemblyName>
+		<RootNamespace>Linn.Template.Messaging</RootNamespace>
+	</PropertyGroup>
 
-  <ItemGroup>
+	<ItemGroup>
 		<PackageReference Include="Linn.Common.Messaging.RabbitMQ" Version="3.0.0" />
 		<PackageReference Include="RabbitMQ.Client" Version="6.4.0" />
-  </ItemGroup>
+	</ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Handlers\" />
-    <Folder Include="Messages\" />
-  </ItemGroup>
+	<ItemGroup>
+		<Folder Include="Handlers\" />
+		<Folder Include="Messages\" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Domain.LinnApps\Domain.LinnApps.csproj" />
-    <ProjectReference Include="..\Resources\Resources.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Domain.LinnApps\Domain.LinnApps.csproj" />
+		<ProjectReference Include="..\Resources\Resources.csproj" />
+	</ItemGroup>
 
 </Project>

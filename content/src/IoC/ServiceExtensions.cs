@@ -36,7 +36,7 @@
                 .AddTransient<ITemplateEngine, RazorTemplateEngine>()
 
                 .AddTransient<IPdfService>(
-                    x => new PdfService(ConfigurationManager.Configuration["HTML_TO_PDF_API_CONVERSION_ENDPOINT"], new HttpClient()));
+                    x => new PdfService(ConfigurationManager.Configuration["PDF_SERVICE_ROOT"], new HttpClient()));
         }
     }
 }
