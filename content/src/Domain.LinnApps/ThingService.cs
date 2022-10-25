@@ -33,22 +33,6 @@
 
         public Thing CreateThing(Thing thing)
         {
-            var html = 
-                this.templateEngine.Render(thing, "<html><h1>Thing Name: {{ name }}</h1></html>")
-                .Result;
-
-            this.emailSender.SendEmail(
-                thing.RecipientAddress,
-                thing.RecipientName,
-                null,
-                null,
-                "things@linn.co.uk",
-                "Linn Things",
-                thing.Name,
-                thing.CodeId.ToString(),
-                this.pdfService.ConvertHtmlToPdf(html, false).Result,
-                "attachment.pdf");
-
             return thing;
         }
     }
