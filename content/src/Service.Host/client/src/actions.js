@@ -1,6 +1,1 @@
-const testAction = () => ({
-    type: 'TEST_ACTION',
-    payload: {}
-});
-
-export default testAction;
+export default { testAction: () => ({ type: 'TEST_ACTION', payload: {} }) };

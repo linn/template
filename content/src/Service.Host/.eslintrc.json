@@ -4,11 +4,11 @@
     "plugins": ["prettier", "jest", "react-hooks"],
     "parser": "babel-eslint",
     "env": {
-        "browser": true
+        "browser": true,
+        "jest": true
     },
     "rules": {
         "prettier/prettier": ["error"],
-        "linebreak-style": ["error", "windows"],
         "react/jsx-filename-extension": 0,
         "spaced-comment": "off",
         "react-hooks/rules-of-hooks": "error",
