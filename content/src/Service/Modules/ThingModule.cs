@@ -4,8 +4,6 @@
     using System.Threading.Tasks;
 
     using Carter;
-    using Carter.ModelBinding;
-    using Carter.Request;
     using Carter.Response;
 
     using Linn.Common.Facade;
@@ -13,29 +11,32 @@
     using Linn.Template.Resources;
     using Linn.Template.Service.Extensions;
 
+    using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Http;
+    using Microsoft.AspNetCore.Routing;
 
-    public class ThingModule : CarterModule
+    public class ThingModule : ICarterModule
     {
-        private readonly IFacadeResourceService<Thing, int, ThingResource, ThingResource> thingFacadeService;
-
-        private readonly IThingService thingService;
-
-        public ThingModule(IFacadeResourceService<Thing, int, ThingResource, ThingResource> thingFacadeService, IThingService thingService)
+        public void AddRoutes(IEndpointRouteBuilder app)
         {
-            this.thingFacadeService = thingFacadeService;
-            this.thingService = thingService;
-            this.Get("/template/things", this.GetThings);
-            this.Get("/template/things/{id:int}", this.GetThingById);
-            this.Post("/template/things/{id:int}", this.DoNothing);
-            this.Post("/template/things/send-message", this.SendMessage);
-            this.Post("/template/things", this.CreateThing);
-            this.Put("/template/things/{id:int}", this.UpdateThing);
+            app.MapGet("/template/things", this.GetThings);
+            app.MapGet("/template/things/{id:int}", this.GetThingById);
+            app.MapPost("/template/things/{id:int}", this.DoNothing);
+            app.MapPost("/template/things/send-message", this.SendMessage);
+            app.MapPut("/template/things/{id:int}", this.UpdateThing);
+            app.MapPost("/template/things", this.CreateThing);
         }
 
-        private async Task SendMessage(HttpRequest req, HttpResponse res)
+        private async Task GetThings(
+            HttpResponse res,
+            IFacadeResourceService<Thing, int, ThingResource, ThingResource> thingFacadeService)
         {
-            this.thingService.SendThingMessage("Test Message");
+            await res.Negotiate(thingFacadeService.GetAll());
+        }
+
+        private async Task SendMessage(HttpRequest req, HttpResponse res, IThingService thingService)
+        {
+            thingService.SendThingMessage("Test Message");
 
             await res.Negotiate(new SuccessResult<ProcessResultResource>(new ProcessResultResource(true, "ok")));
         }
@@ -45,33 +46,36 @@
             throw new NotImplementedException("This should never be hit");
         }
 
-        private async Task GetThings(HttpRequest req, HttpResponse res)
+        private async Task GetThingById(
+            HttpRequest req,
+            HttpResponse res,
+            int id,
+            IFacadeResourceService<Thing, int, ThingResource, ThingResource> thingFacadeService)
         {
-            await res.Negotiate(this.thingFacadeService.GetAll());
-        }
-
-        private async Task GetThingById(HttpRequest req, HttpResponse res)
-        {
-            var thingId = req.RouteValues.As<int>("id");
-
-            var result = this.thingFacadeService.GetById(thingId, req.HttpContext.GetPrivileges());
+            var result = thingFacadeService.GetById(id, req.HttpContext.GetPrivileges());
 
             await res.Negotiate(result);
         }
 
-        private async Task CreateThing(HttpRequest request, HttpResponse response)
+        private async Task CreateThing(
+            HttpRequest request,
+            HttpResponse response,
+            ThingResource thingResource,
+            IFacadeResourceService<Thing, int, ThingResource, ThingResource> thingFacadeService)
         {
-            var resource = await request.Bind<ThingResource>();
-            var result = this.thingFacadeService.Add(resource);
+            var result = thingFacadeService.Add(thingResource);
 
             await response.Negotiate(result);
         }
 
-        private async Task UpdateThing(HttpRequest request, HttpResponse response)
+        private async Task UpdateThing(
+            HttpRequest request,
+            HttpResponse response,
+            int id,
+            ThingResource thingResource,
+            IFacadeResourceService<Thing, int, ThingResource, ThingResource> thingFacadeService)
         {
-            var id = request.RouteValues.As<int>("id");
-            var resource = await request.Bind<ThingResource>();
-            var result = this.thingFacadeService.Update(id, resource);
+            var result = thingFacadeService.Update(id, thingResource);
 
             await response.Negotiate(result);
         }

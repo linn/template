@@ -1,11 +1,11 @@
 ﻿namespace Linn.Template.Integration.Tests.ThingModuleTests
 {
     using System.Net;
+    using System.Net.Http.Json;
 
     using FluentAssertions;
 
-    using Linn.Common.Facade;
-    using Linn.Common.Resources;
+    using Linn.Template.Domain.LinnApps;
     using Linn.Template.Integration.Tests.Extensions;
     using Linn.Template.Resources;
 
@@ -26,35 +26,18 @@
 
             this.resource = new ThingResource { Id = this.thingId, Name = "new name" };
 
-            this.FacadeService.Update(this.thingId, Arg.Is<ThingResource>(a => a.Id == this.thingId))
-                .Returns(
-                    new SuccessResult<ThingResource>(
-                        new ThingResource
-                            {
-                                Id = this.thingId,
-                                Name = this.resource.Name,
-                                Links = new[] { new LinkResource("self", $"/template/things/{this.thingId}") }
-                            }));
+            this.ThingRepository
+                .FindById(this.thingId).Returns(new Thing {Id = this.thingId, Name = "new name"});
 
-            this.Response = this.Client.Put(
+            this.Response = this.Client.PutAsJsonAsync(
                 $"/template/things/{this.thingId}",
-                this.resource,
-                with =>
-                    {
-                        with.Accept("application/json");
-                }).Result;
+                this.resource).Result;
         }
 
         [Test]
         public void ShouldReturnSuccess()
         {
             this.Response.StatusCode.Should().Be(HttpStatusCode.OK);
-        }
-
-        [Test]
-        public void ShouldCallUpdate()
-        {
-            this.FacadeService.Received().Update(this.thingId, Arg.Is<ThingResource>(a => a.Id == this.thingId));
         }
 
         [Test]

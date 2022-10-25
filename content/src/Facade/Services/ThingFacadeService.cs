@@ -45,7 +45,7 @@
 
         protected override void UpdateFromResource(Thing entity, ThingResource updateResource)
         {
-            throw new NotImplementedException();
+            return;
         }
 
         protected override Expression<Func<Thing, bool>> SearchExpression(string searchTerm)

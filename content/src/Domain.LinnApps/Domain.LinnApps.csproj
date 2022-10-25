@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-	<TargetFramework>net5.0</TargetFramework>
+	<TargetFramework>net6.0</TargetFramework>
     <AssemblyName>Linn.Template.Domain.LinnApps</AssemblyName>
     <RootNamespace>Linn.Template.Domain.LinnApps</RootNamespace>
   </PropertyGroup>
@@ -12,9 +12,9 @@
     <PackageReference Include="Linn.Common.Domain" Version="1.0.0" />
     <PackageReference Include="Linn.Common.Domain.LinnApps" Version="1.0.0" />
     <PackageReference Include="Linn.Common.Email" Version="1.0.0" />
+    <PackageReference Include="Linn.Common.Messaging.RabbitMQ" Version="3.0.0" />
     <PackageReference Include="Linn.Common.Pdf" Version="1.0.0" />
     <PackageReference Include="Linn.Common.Persistence" Version="2.1.1" />
     <PackageReference Include="Linn.Common.Reporting" Version="1.4.0" />
   </ItemGroup>
-
 </Project>

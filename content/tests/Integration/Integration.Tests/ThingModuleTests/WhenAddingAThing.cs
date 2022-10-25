@@ -1,11 +1,12 @@
 ﻿namespace Linn.Template.Integration.Tests.ThingModuleTests
 {
+    using System.Collections.Generic;
     using System.Net;
+    using System.Net.Http.Json;
 
     using FluentAssertions;
 
-    using Linn.Common.Facade;
-    using Linn.Common.Resources;
+    using Linn.Template.Domain.LinnApps;
     using Linn.Template.Integration.Tests.Extensions;
     using Linn.Template.Resources;
 
@@ -15,27 +16,27 @@
 
     public class WhenAddingAThing : ContextBase
     {
-        private ThingResource thingResource;
+        private Thing thing;
+
+        private ThingResource resource;
 
         [SetUp]
         public void SetUp()
         {
-            this.thingResource = new ThingResource { Id = 123, Name = "new" };
+            this.resource = new ThingResource
+                                {
+                                    Id = 123, 
+                                    Name = "new", 
+                                    Code = new ThingCodeResource(), 
+                                    Details = new List<ThingDetailResource>()
+                                };
+            this.thing = new Thing { Id = 123, Name = "new" };
 
-            this.FacadeService.Add(Arg.Any<ThingResource>()).Returns(
-                new CreatedResult<ThingResource>(
-                    new ThingResource
-                        {
-                            Id = 123, Name = "new", Links = new[] { new LinkResource("self", "/template/things/123") }
-                        }));
+            this.ThingService.CreateThing(Arg.Any<Thing>()).Returns(this.thing);
 
-            this.Response = this.Client.Post(
+            this.Response = this.Client.PostAsJsonAsync(
                 "/template/things",
-                this.thingResource,
-                with =>
-                    {
-                        with.Accept("application/json");
-                }).Result;
+                this.resource).Result;
         }
 
         [Test]

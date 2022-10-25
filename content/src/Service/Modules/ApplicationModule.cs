@@ -7,21 +7,23 @@
 
     using Linn.Template.Service.Models;
 
+    using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Http;
+    using Microsoft.AspNetCore.Routing;
 
-    public class ApplicationModule : CarterModule
+    public class ApplicationModule : ICarterModule
     {
-        public ApplicationModule()
+        public void AddRoutes(IEndpointRouteBuilder app)
         {
-            this.Get("/", this.Redirect);
-            this.Get("/template", this.GetApp);
-            this.Get("/template/signin-oidc-client", this.GetApp);
-            this.Get("/template/signin-oidc-silent", this.GetSilentRenew);
+            app.MapGet("/", this.Redirect);
+            app.MapGet("/play", this.GetApp);
+            app.MapGet("/play/signin-oidc-client", this.GetApp);
+            app.MapGet("/play/signin-oidc-silent", this.GetSilentRenew);
         }
 
         private Task Redirect(HttpRequest req, HttpResponse res)
         {
-            res.Redirect("/template");
+            res.Redirect("/play");
             return Task.CompletedTask;
         }
 

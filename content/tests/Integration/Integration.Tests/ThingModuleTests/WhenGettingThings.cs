@@ -6,7 +6,7 @@
 
     using FluentAssertions;
 
-    using Linn.Common.Facade;
+    using Linn.Template.Domain.LinnApps;
     using Linn.Template.Integration.Tests.Extensions;
     using Linn.Template.Resources;
 
@@ -19,9 +19,8 @@
         [SetUp]
         public void SetUp()
         {
-            this.FacadeService.GetAll().Returns(
-                new SuccessResult<IEnumerable<ThingResource>>(
-                    new[] { new ThingResource { Id = 1 }, new ThingResource { Id = 2 } }));
+            this.ThingRepository.FindAll().Returns(
+                new List<Thing> { new Thing { Id = 1 }, new Thing { Id = 2 } }.AsQueryable());
 
             this.Response = this.Client.Get(
                 "/template/things",

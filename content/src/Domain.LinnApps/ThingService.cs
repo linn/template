@@ -1,12 +1,12 @@
 ﻿namespace Linn.Template.Domain.LinnApps
 {
     using Linn.Common.Email;
+    using Linn.Common.Messaging.RabbitMQ.Dispatchers;
     using Linn.Common.Pdf;
-    using Linn.Template.Domain.LinnApps.Dispatchers;
 
     public class ThingService : IThingService
     {
-        private readonly IMessageSender sender;
+        private readonly IMessageDispatcher<Thing> dispatcher;
 
         private readonly IEmailService emailSender;
 
@@ -15,12 +15,12 @@
         private readonly ITemplateEngine templateEngine;
 
         public ThingService(
-            IMessageSender sender, 
             IEmailService emailSender, 
             IPdfService pdfService, 
-            ITemplateEngine templateEngine)
+            ITemplateEngine templateEngine,
+            IMessageDispatcher<Thing> dispatcher)
         {
-            this.sender = sender;
+            this.dispatcher = dispatcher;
             this.emailSender = emailSender;
             this.pdfService = pdfService;
             this.templateEngine = templateEngine;
@@ -28,7 +28,7 @@
 
         public void SendThingMessage(string message)
         {
-            this.sender.SendMessage(message);
+            this.dispatcher.Dispatch(new Thing { Name = "Some Data" });
         }
 
         public Thing CreateThing(Thing thing)

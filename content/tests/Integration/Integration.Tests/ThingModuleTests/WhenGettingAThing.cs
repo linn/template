@@ -1,11 +1,10 @@
 ﻿namespace Linn.Template.Integration.Tests.ThingModuleTests
 {
-    using System.Collections.Generic;
     using System.Net;
 
     using FluentAssertions;
 
-    using Linn.Common.Facade;
+    using Linn.Template.Domain.LinnApps;
     using Linn.Template.Integration.Tests.Extensions;
     using Linn.Template.Resources;
 
@@ -17,16 +16,15 @@
     {
         private int thingId;
 
-        private ThingResource thing;
+        private Thing thing;
 
         [SetUp]
         public void SetUp()
         {
             this.thingId = 1;
-            this.thing = new ThingResource { Id = this.thingId };
+            this.thing = new Thing { Id = this.thingId };
 
-            this.FacadeService.GetById(this.thingId, Arg.Any<IEnumerable<string>>())
-                .Returns(new SuccessResult<ThingResource>(this.thing));
+            this.ThingRepository.FindById(this.thingId).Returns(this.thing);
 
             this.Response = this.Client.Get(
                 $"/template/things/{this.thingId}",

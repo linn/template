@@ -6,6 +6,8 @@
     using Linn.Common.Logging;
     using Linn.Common.Persistence;
     using Linn.Template.Domain.LinnApps;
+    using Linn.Template.Facade.ResourceBuilders;
+    using Linn.Template.Facade.Services;
     using Linn.Template.IoC;
     using Linn.Template.Resources;
     using Linn.Template.Service.Modules;
@@ -30,12 +32,20 @@
 
         protected IThingService ThingService { get; private set; }
 
+        protected IRepository<Thing, int> ThingRepository { get; private set; }
+
         [SetUp]
         public void EstablishContext()
         {
             this.TransactionManager = Substitute.For<ITransactionManager>();
-            this.FacadeService = Substitute.For<IFacadeResourceService<Thing, int, ThingResource, ThingResource>>();
+            this.ThingRepository = Substitute.For<IRepository<Thing, int>>();
             this.ThingService = Substitute.For<IThingService>();
+
+            this.FacadeService = new ThingFacadeService(
+                this.ThingRepository,
+                this.TransactionManager,
+                new ThingResourceBuilder(),
+                this.ThingService);
             this.Log = Substitute.For<ILog>();
 
             this.Client = TestClient.With<ThingModule>(
@@ -46,6 +56,7 @@
                         services.AddSingleton(this.Log);
                         services.AddSingleton(this.ThingService);
                         services.AddHandlers();
+                        services.AddRouting();
                     },
                 FakeAuthMiddleware.EmployeeMiddleware);
         }
