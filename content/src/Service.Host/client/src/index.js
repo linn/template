@@ -39,9 +39,9 @@ document.body.style.margin = '0';
 render(Root);
 
 if ((!user || user.expired) && window.location.pathname !== '/purchasing/signin-oidc-client') {
-    // userManager.signinRedirect({
-    //     data: { redirect: window.location.pathname + window.location.search }
-    // });
+    userManager.signinRedirect({
+        data: { redirect: window.location.pathname + window.location.search }
+    });
 } else {
     render(Root);
 
