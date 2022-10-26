@@ -1,6 +1,6 @@
 ﻿import React from 'react';
 import { CallbackComponent } from 'redux-oidc';
-import { Loading } from '@linn-it/linn-form-components-library';
+//import { Loading } from '@linn-it/linn-form-components-library';
 import history from '../history';
 
 import userManager from '../helpers/userManager';
@@ -13,7 +13,8 @@ function Callback() {
                 history.push(user.state.redirect);
             }}
         >
-            <Loading />
+            loading
+            {/* <Loading /> */}
         </CallbackComponent>
     );
 }

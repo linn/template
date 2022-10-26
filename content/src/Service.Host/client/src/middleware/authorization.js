@@ -1,9 +1,8 @@
 ﻿import { RSAA } from 'redux-api-middleware';
 import { getAccessToken } from '../selectors/getAccessToken';
 
-export default ({ getState }) =>
-    next =>
-    action => {
+export default function getNext({ getState }) {
+    return next => action => {
         if (action[RSAA]) {
             if (action[RSAA].options && action[RSAA].options.requiresAuth) {
                 // eslint-disable-next-line no-param-reassign
@@ -16,3 +15,4 @@ export default ({ getState }) =>
 
         return next(action);
     };
+}
