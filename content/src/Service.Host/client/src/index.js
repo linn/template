@@ -1,6 +1,5 @@
 ﻿import React from 'react';
 import { createRoot } from 'react-dom/client';
-// import { AppContainer } from 'react-hot-loader';
 import { SnackbarProvider } from 'notistack';
 import { ThemeProvider, StyledEngineProvider } from '@mui/material/styles';
 import { linnTheme } from '@linn-it/linn-form-components-library';
