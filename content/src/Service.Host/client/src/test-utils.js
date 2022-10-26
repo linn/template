@@ -1,12 +1,12 @@
 import { render } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import React from 'react';
-import { MuiThemeProvider, createTheme } from '@material-ui/core/styles';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
 import configureMockStore from 'redux-mock-store';
 import { MemoryRouter } from 'react-router-dom';
 import { SnackbarProvider } from 'notistack';
-import { MuiPickersUtilsProvider } from '@material-ui/pickers';
-import MomentUtils from '@date-io/moment';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import { apiMiddleware as api } from 'redux-api-middleware';
 import thunkMiddleware from 'redux-thunk';
 
@@ -14,19 +14,24 @@ const middleware = [api, thunkMiddleware];
 
 // eslint-disable-next-line react/prop-types
 const Providers = ({ children }) => {
+    global.fetch = jest.fn(() =>
+        Promise.resolve({
+            json: () => Promise.resolve({})
+        })
+    );
     const mockStore = configureMockStore(middleware);
     const store = mockStore({ oidc: { user: { profile: {} } }, historyStore: { push: jest.fn() } });
     return (
         <Provider store={store}>
-            <MuiThemeProvider theme={createTheme()}>
+            <ThemeProvider theme={createTheme()}>
                 <SnackbarProvider dense maxSnack={5}>
                     <MemoryRouter>
-                        <MuiPickersUtilsProvider utils={MomentUtils}>
+                        <LocalizationProvider dateAdapter={AdapterMoment}>
                             {children}
-                        </MuiPickersUtilsProvider>
+                        </LocalizationProvider>
                     </MemoryRouter>
                 </SnackbarProvider>
-            </MuiThemeProvider>
+            </ThemeProvider>
         </Provider>
     );
 };

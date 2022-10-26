@@ -1,24 +1,23 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
-    <AssemblyName>Linn.Template.Service</AssemblyName>
-    <RootNamespace>Linn.Template.Service</RootNamespace>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<AssemblyName>Linn.Template.Service</AssemblyName>
+		<RootNamespace>Linn.Template.Service</RootNamespace>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Carter" Version="5.2.0" />
-    <PackageReference Include="Linn.Common.Configuration" Version="2.0.0" />
-    <PackageReference Include="linn.common.facade.carter" Version="5.0.0" />
-    <PackageReference Include="Linn.Common.Pdf" Version="1.0.0" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Carter" Version="6.0.0" />
+		<PackageReference Include="Linn.Common.Configuration" Version="2.0.0" />
+		<PackageReference Include="Linn.Common.Facade.Carter" Version="5.3.0" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Domain.LinnApps\Domain.LinnApps.csproj" />
-    <ProjectReference Include="..\Domain\Domain.csproj" />
-    <ProjectReference Include="..\Facade\Facade.csproj" />
-    <ProjectReference Include="..\Persistence\Persistence.csproj" />
-    <ProjectReference Include="..\Resources\Resources.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Domain.LinnApps\Domain.LinnApps.csproj" />
+		<ProjectReference Include="..\Domain\Domain.csproj" />
+		<ProjectReference Include="..\Facade\Facade.csproj" />
+		<ProjectReference Include="..\Persistence\Persistence.csproj" />
+		<ProjectReference Include="..\Resources\Resources.csproj" />
+	</ItemGroup>
 
 </Project>

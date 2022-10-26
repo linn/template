@@ -1,10 +1,10 @@
-﻿import React, { useEffect } from 'react';
-import Typography from '@material-ui/core/Typography';
+﻿import React from 'react';
+import Typography from '@mui/material/Typography';
 import { useSelector, useDispatch } from 'react-redux';
 import { Page } from '@linn-it/linn-form-components-library';
 
 import getName from '../selectors/userSelectors';
-import testAction from '../actions';
+import actions from '../actions';
 import config from '../config';
 import history from '../history';
 
@@ -12,7 +12,7 @@ function App() {
     const name = useSelector(state => getName(state));
     const dispatch = useDispatch();
 
-    useEffect(() => dispatch(testAction()), [dispatch]);
+    dispatch(actions.testAction());
 
     return (
         <Page homeUrl={config.appRoot} history={history}>

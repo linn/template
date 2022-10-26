@@ -1,6 +1,7 @@
 ﻿namespace Linn.Template.Facade.Services
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Linq.Expressions;
 
@@ -23,7 +24,7 @@
             this.domainService = domainService;
         }
 
-        protected override Thing CreateFromResource(ThingResource resource)
+        protected override Thing CreateFromResource(ThingResource resource, IEnumerable<string> privileges = null)
         {
             var thing = new Thing
                             {
@@ -43,12 +44,27 @@
             return this.domainService.CreateThing(thing);
         }
 
-        protected override void UpdateFromResource(Thing entity, ThingResource updateResource)
+        protected override void UpdateFromResource(Thing entity, ThingResource updateResource, IEnumerable<string> privileges = null)
+        {
+            return;
+        }
+
+        protected override Expression<Func<Thing, bool>> SearchExpression(string searchTerm)
         {
             throw new NotImplementedException();
         }
 
-        protected override Expression<Func<Thing, bool>> SearchExpression(string searchTerm)
+        protected override void SaveToLogTable(
+            string actionType,
+            int userNumber,
+            Thing entity,
+            ThingResource resource,
+            ThingResource updateResource)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void DeleteOrObsoleteResource(Thing entity, IEnumerable<string> privileges = null)
         {
             throw new NotImplementedException();
         }

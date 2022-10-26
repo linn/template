@@ -34,7 +34,9 @@
             var connectionString = $"Data Source={dataSource};User Id={userId};Password={password};";
 
             optionsBuilder.UseOracle(connectionString, options => options.UseOracleSQLCompatibility("11"));
-            optionsBuilder.UseLoggerFactory(MyLoggerFactory);
+
+            // can optionally Log any SQL that is ran by uncommenting:
+            // optionsBuilder.UseLoggerFactory(MyLoggerFactory);
             optionsBuilder.EnableSensitiveDataLogging(true);
             base.OnConfiguring(optionsBuilder);
         }

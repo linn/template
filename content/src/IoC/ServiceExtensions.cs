@@ -33,7 +33,7 @@
                 
                 .AddTransient<IEmailService>(x => new EmailService(x.GetService<IAmazonSimpleEmailService>()))
                 
-                .AddTransient<ITemplateEngine, TemplateEngine>()
+                .AddTransient<ITemplateEngine, RazorTemplateEngine>()
 
                 .AddTransient<IPdfService>(
                     x => new PdfService(ConfigurationManager.Configuration["PDF_SERVICE_ROOT"], new HttpClient()));

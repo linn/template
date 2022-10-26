@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31702.278
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "src\Domain\Domain.csproj", "{309A3AD8-4D8A-411D-9C52-D6812EB7D776}"
 EndProject
@@ -64,6 +64,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain.LinnApps", "src\Domain.LinnApps\Domain.LinnApps.csproj", "{67742D7E-5B28-4160-9247-11738489FB7F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain.LinnApps.Tests", "tests\Unit\Domain.LinnApps.Tests\Domain.LinnApps.Tests.csproj", "{E5E5B5E0-3AB8-41D3-93FA-A0C6AF68796A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scheduling.Host", "src\Scheduling.Host\Scheduling.Host.csproj", "{65E27B11-5395-40A9-ABA4-7F09FF8BFFFE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -143,6 +145,10 @@ Global
 		{E5E5B5E0-3AB8-41D3-93FA-A0C6AF68796A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E5E5B5E0-3AB8-41D3-93FA-A0C6AF68796A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E5E5B5E0-3AB8-41D3-93FA-A0C6AF68796A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65E27B11-5395-40A9-ABA4-7F09FF8BFFFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65E27B11-5395-40A9-ABA4-7F09FF8BFFFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65E27B11-5395-40A9-ABA4-7F09FF8BFFFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65E27B11-5395-40A9-ABA4-7F09FF8BFFFE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
