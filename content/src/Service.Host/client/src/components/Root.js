@@ -1,52 +1,48 @@
 ﻿import React from 'react';
 import { Provider } from 'react-redux';
-import { Route, Redirect, Switch } from 'react-router';
+import { Route, Routes } from 'react-router';
 import { OidcProvider } from 'redux-oidc';
-import { ConnectedRouter } from 'connected-react-router';
 import { Navigation } from '@linn-it/linn-form-components-library';
+import { BrowserRouter, Navigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import history from '../history';
 import App from './App';
 import Callback from './Callback';
 import userManager from '../helpers/userManager';
 import 'typeface-roboto';
 import NotFoundPage from './NotFoundPage';
 
-const Root = ({ store }) => (
-    <div>
-        <div className="padding-top-when-not-printing">
-            <Provider store={store}>
-                <OidcProvider store={store} userManager={userManager}>
-                    <ConnectedRouter history={history}>
+function Root({ store }) {
+    return (
+        <div>
+            <div className="padding-top-when-not-printing">
+                <Provider store={store}>
+                    <OidcProvider store={store} userManager={userManager}>
                         <div>
                             <Navigation />
-
-                            <Route exact path="/" render={() => <Redirect to="/template" />} />
-
-                            <Route
-                                path="/"
-                                render={() => {
-                                    document.title = 'Template';
-                                    return false;
-                                }}
-                            />
-
-                            <Switch>
-                                <Route exact path="/template" component={App} />
-                                <Route
-                                    exact
-                                    path="/template/signin-oidc-client"
-                                    component={Callback}
-                                />
-                                <Route component={NotFoundPage} />
-                            </Switch>
+                            <BrowserRouter>
+                                <Routes>
+                                    <Route
+                                        exact
+                                        path="/"
+                                        element={<Navigate to="/template" replace />}
+                                    />
+                                    <Route path="/template" element={<App />} />
+                                    <Route exact path="/template/:id" element={<App />} />
+                                    <Route
+                                        exact
+                                        path="/template/signin-oidc-client"
+                                        element={<Callback />}
+                                    />
+                                    <Route element={<NotFoundPage />} />
+                                </Routes>
+                            </BrowserRouter>
                         </div>
-                    </ConnectedRouter>
-                </OidcProvider>
-            </Provider>
+                    </OidcProvider>
+                </Provider>
+            </div>
         </div>
-    </div>
-);
+    );
+}
 
 Root.propTypes = {
     store: PropTypes.shape({}).isRequired

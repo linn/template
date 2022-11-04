@@ -1,5 +1,5 @@
 const initialState = [];
-
+// eslint-disable-next-line default-param-last
 function history(state = initialState, action) {
     if (typeof state === 'undefined') {
         return state;

@@ -14,6 +14,7 @@ const rootReducer = history =>
     combineReducers({
         oidc,
         historyStore,
+
         router: connectRouter(history),
         ...sharedLibraryReducers,
         errors
