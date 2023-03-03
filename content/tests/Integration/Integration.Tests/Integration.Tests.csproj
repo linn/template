@@ -8,7 +8,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Carter" Version="6.1.1" />
+		<PackageReference Include="Carter" Version="7.0.0" />
 		<PackageReference Include="FluentAssertions" Version="6.10.0" />
 		<PackageReference Include="Linn.Common.Persistence" Version="3.0.0" />
 		<PackageReference Include="Linn.Common.Reporting.Resources" Version="1.5.0" />
