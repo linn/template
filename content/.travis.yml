@@ -1,8 +1,12 @@
 language: csharp
-dist: xenial
+dist: focal
 sudo: required
 mono: none
-dotnet: 6.0
+dotnet: 5.0
+addons:
+  apt:
+    packages:
+    - dotnet-sdk-7.0
 services: docker
 before_install: 
  - chmod +x ./scripts/*.sh

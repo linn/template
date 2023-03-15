@@ -7,7 +7,6 @@
     using Linn.Template.Domain.LinnApps;
     using Linn.Template.Messaging.Handlers;
     using Linn.Template.Messaging.Messages;
-    using Linn.Template.Resources;
 
     using Microsoft.Extensions.DependencyInjection;
     using RabbitMQ.Client.Events;
@@ -20,13 +19,13 @@
             var routingKeys = new[] { ThingMessage.RoutingKey };
 
             return services.AddSingleton<ChannelConfiguration>(d => new ChannelConfiguration("template", routingKeys))
-                .AddScoped(d => new EventingBasicConsumer(d.GetService<ChannelConfiguration>()?.ConsumerChannel));
+                .AddSingleton(d => new EventingBasicConsumer(d.GetService<ChannelConfiguration>()?.ConsumerChannel));
         }
 
         public static IServiceCollection AddMessageHandlers(this IServiceCollection services)
         {
             // register handlers for different message types
-            return services.AddScoped<Handler<ThingMessage>, ThingMessageHandler>();
+            return services.AddSingleton<Handler<ThingMessage>, ThingMessageHandler>();
         }
 
         public static IServiceCollection AddMessageDispatchers(this IServiceCollection services)

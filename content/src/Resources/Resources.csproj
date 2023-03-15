@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>net6.0</TargetFramework>
+		<TargetFramework>net7.0</TargetFramework>
 		<AssemblyName>Linn.Template.Resources</AssemblyName>
 		<RootNamespace>Linn.Template.Resources</RootNamespace>
 	</PropertyGroup>

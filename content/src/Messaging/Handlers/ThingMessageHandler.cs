@@ -7,20 +7,32 @@
     using Linn.Common.Messaging.RabbitMQ.Handlers;
     using Linn.Template.Domain.LinnApps;
     using Linn.Template.Messaging.Messages;
-    using Linn.Template.Resources;
+
+    using Microsoft.Extensions.DependencyInjection;
+
 
     using Newtonsoft.Json;
 
     public class ThingMessageHandler : Handler<ThingMessage>
     {
-        public ThingMessageHandler(ILog logger)
+        private readonly IServiceProvider serviceProvider;
+
+        public ThingMessageHandler(ILog logger, IServiceProvider serviceProvider)
             : base(logger)
         {
+            this.serviceProvider = serviceProvider;
         }
 
         public override bool Handle(ThingMessage message)
         {
             this.Logger.Info("Message received: " + message.Event.RoutingKey);
+
+            // create a service scope in the context of handling this message
+            using var scope = this.serviceProvider.CreateScope();
+
+            // obtain required scoped services like so:
+            var dependency = scope.ServiceProvider.GetRequiredService<IThingService>();
+            // they will be disposed along with the scope when this Handle() function returns
 
             try
             {
@@ -28,6 +40,7 @@
                 var enc = Encoding.UTF8.GetString(body);
                 var resource = JsonConvert.DeserializeObject<Thing>(enc);
                 this.Logger.Info("Data: " + resource.Name);
+
                 return true;
             }
             catch (Exception e)

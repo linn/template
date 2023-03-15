@@ -1,5 +1,5 @@
-﻿FROM mcr.microsoft.com/dotnet/runtime:6.0
-FROM mcr.microsoft.com/dotnet/aspnet:6.0
+﻿FROM mcr.microsoft.com/dotnet/runtime:7.0
+FROM mcr.microsoft.com/dotnet/aspnet:7.0
 
 ARG gitBranch=unspecified
 ENV TZ=Europe/London
