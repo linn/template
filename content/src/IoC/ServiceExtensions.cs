@@ -16,6 +16,8 @@
 
     using Microsoft.Extensions.DependencyInjection;
 
+    using RazorEngineCore;
+
     public static class ServiceExtensions
     {
         public static IServiceCollection AddFacade(this IServiceCollection services)
@@ -30,7 +32,8 @@
             return services.AddTransient<IThingService, ThingService>()
                 .AddTransient<IAmazonSimpleEmailService>(
                     x => new AmazonSimpleEmailServiceClient(x.GetService<AWSOptions>()?.Region))
-                
+                .AddTransient<IRazorEngine, RazorEngine>()
+
                 .AddTransient<IEmailService>(x => new EmailService(x.GetService<IAmazonSimpleEmailService>()))
                 
                 .AddTransient<ITemplateEngine, RazorTemplateEngine>()

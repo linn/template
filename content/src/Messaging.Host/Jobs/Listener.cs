@@ -39,35 +39,35 @@ public class Listener : BackgroundService
         this.logger = logger;
         this.channelConfiguration = channelConfiguration;
         this.thingMessageHandler = thingMessageHandler;
-        consumer.Received += (_, ea) =>
-        {
-            // switch on message RoutingKey to decide which handler to use
-            // handlers process the message and return true if successful
-            // or log errors and return false if unsuccessful
-            bool success = ea.RoutingKey switch
-            {
-                ThingMessage.RoutingKey => thingMessageHandler.Handle(
-                    new ThingMessage(ea)),
-                _ => false
-            };
-
-            if (success)
-            {
-                // acknowledge successfully handled messages
-                this.channelConfiguration.ConsumerChannel.BasicAck(ea.DeliveryTag, false);
-            }
-            else
-            {
-                // reject problem messages
-                this.channelConfiguration.ConsumerChannel.BasicReject(ea.DeliveryTag, false);
-            }
-        };
         this.channel = this.channelConfiguration.ConsumerChannel;
     }
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
         this.logger.Info("Waiting for messages. To exit press CTRL+C");
+        consumer.Received += (_, ea) =>
+            {
+                // switch on message RoutingKey to decide which handler to use
+                // handlers process the message and return true if successful
+                // or log errors and return false if unsuccessful
+                bool success = ea.RoutingKey switch
+                    {
+                        ThingMessage.RoutingKey => thingMessageHandler.Handle(
+                            new ThingMessage(ea)),
+                        _ => false
+                    };
+
+                if (success)
+                {
+                    // acknowledge successfully handled messages
+                    this.channelConfiguration.ConsumerChannel.BasicAck(ea.DeliveryTag, false);
+                }
+                else
+                {
+                    // reject problem messages
+                    this.channelConfiguration.ConsumerChannel.BasicReject(ea.DeliveryTag, false);
+                }
+            };
         this.channel.BasicConsume(queue: $"{this.queueName}.q", autoAck: false, consumer: this.consumer);
         await Task.CompletedTask;
     }
