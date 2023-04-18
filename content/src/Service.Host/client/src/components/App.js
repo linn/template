@@ -3,6 +3,7 @@ import Typography from '@mui/material/Typography';
 import { useSelector, useDispatch } from 'react-redux';
 import { Page } from '@linn-it/linn-form-components-library';
 import { useParams } from 'react-router';
+import { Link } from 'react-router-dom';
 
 import getName from '../selectors/userSelectors';
 import actions from '../actions';
@@ -22,6 +23,7 @@ function App() {
             <Typography variant="h6">App</Typography>
             <Typography>Hello {name}</Typography>
             <Typography>id is {id}</Typography>
+            <Link to="/template/test-page"> test page </Link>
         </Page>
     );
 }

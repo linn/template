@@ -3,13 +3,16 @@ import { Provider } from 'react-redux';
 import { Route, Routes } from 'react-router';
 import { OidcProvider } from 'redux-oidc';
 import { Navigation } from '@linn-it/linn-form-components-library';
-import { BrowserRouter, Navigate } from 'react-router-dom';
+import { Navigate, unstable_HistoryRouter as HistoryRouter } from 'react-router-dom';
+
 import PropTypes from 'prop-types';
 import App from './App';
 import Callback from './Callback';
 import userManager from '../helpers/userManager';
 import 'typeface-roboto';
 import NotFoundPage from './NotFoundPage';
+import TestPage from './TestPage';
+import history from '../history';
 
 function Root({ store }) {
     return (
@@ -19,7 +22,7 @@ function Root({ store }) {
                     <OidcProvider store={store} userManager={userManager}>
                         <div>
                             <Navigation />
-                            <BrowserRouter>
+                            <HistoryRouter history={history}>
                                 <Routes>
                                     <Route
                                         exact
@@ -27,6 +30,7 @@ function Root({ store }) {
                                         element={<Navigate to="/template" replace />}
                                     />
                                     <Route path="/template" element={<App />} />
+                                    <Route path="/template/test-page" element={<TestPage />} />
                                     <Route exact path="/template/:id" element={<App />} />
                                     <Route
                                         exact
@@ -35,7 +39,7 @@ function Root({ store }) {
                                     />
                                     <Route element={<NotFoundPage />} />
                                 </Routes>
-                            </BrowserRouter>
+                            </HistoryRouter>
                         </div>
                     </OidcProvider>
                 </Provider>
