@@ -34,7 +34,7 @@ public class Listener : BackgroundService
         Handler<ThingMessage> thingMessageHandler,
         ILog logger)
     {
-        this.queueName = "purchasing";
+        this.queueName = "template";
         this.consumer = consumer;
         this.logger = logger;
         this.channelConfiguration = channelConfiguration;
