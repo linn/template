@@ -71,6 +71,11 @@ Resources:
   templateRole:
     Type: AWS::IAM::Role
     Properties:
+      Tags:
+        - Key: "Project"
+          Value: "template-project"
+        - Key: "CIT"
+          Value: "IT"
       AssumeRolePolicyDocument:
         Version: "2012-10-17"
         Statement:
@@ -114,6 +119,11 @@ Resources:
   templateTaskDefinition:
     Type: AWS::ECS::TaskDefinition
     Properties:
+      Tags:
+        - Key: "Project"
+          Value: "template-project"
+        - Key: "CIT"
+          Value: "IT"
       TaskRoleArn: !GetAtt templateRole.Arn
       ContainerDefinitions:
       - Name: template
@@ -174,6 +184,11 @@ Resources:
 #  templateMessagingTaskDefinition:
 #    Type: AWS::ECS::TaskDefinition
 #    Properties:
+#      Tags:
+#        - Key: "Project"
+#          Value: "template-project"
+#        - Key: "CIT"
+#          Value: "IT"
 #      TaskRoleArn: !GetAtt templateRole.Arn
 #      ContainerDefinitions:
 #      - Name: templateMessaging
@@ -215,6 +230,11 @@ Resources:
 #  templateSchedulingTaskDefinition:
 #    Type: AWS::ECS::TaskDefinition
 #    Properties:
+#      Tags:
+#        - Key: "Project"
+#          Value: "template-project"
+#        - Key: "CIT"
+#          Value: "IT"
 #      TaskRoleArn: !GetAtt templateRole.Arn
 #      ContainerDefinitions:
 #      - Name: templateScheduling
@@ -260,6 +280,11 @@ Resources:
   templateService:
     Type: AWS::ECS::Service
     Properties:
+      Tags:
+        - Key: "Project"
+          Value: "template-project"
+        - Key: "CIT"
+          Value: "IT"
       # Have to use long form conditional
       Cluster: !If
         - isTesting
@@ -282,6 +307,11 @@ Resources:
 #  templateMessagingService:
 #    Type: AWS::ECS::Service
 #    Properties:
+#      Tags:
+#        - Key: "Project"
+#          Value: "template-project"
+#        - Key: "CIT"
+#          Value: "IT"
 #      # Have to use long form conditional
 #      Cluster: !If
 #        - isTesting
