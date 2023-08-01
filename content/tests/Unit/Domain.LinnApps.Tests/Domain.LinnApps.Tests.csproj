@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-	<TargetFramework>net7.0</TargetFramework>
+	<TargetFramework>net8.0</TargetFramework>
     <AssemblyName>Linn.Template.Domain.LinnApps.Tests</AssemblyName>
     <RootNamespace>Linn.Template.Domain.LinnApps.Tests</RootNamespace>
   </PropertyGroup>
