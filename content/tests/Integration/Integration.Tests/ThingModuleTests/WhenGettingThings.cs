@@ -40,7 +40,7 @@
         public void ShouldReturnJsonContentType()
         {
             this.Response.Content.Headers.ContentType.Should().NotBeNull();
-            this.Response.Content.Headers.ContentType?.ToString().Should().Be("application/json; charset=utf-8");
+            this.Response.Content.Headers.ContentType?.ToString().Should().Be("application/json");
         }
 
         [Test]
