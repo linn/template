@@ -26,13 +26,13 @@
             await res.Negotiate(thingFacadeService.GetAll());
         }
 
-        private static dynamic GetThingById(
+        private async Task GetThingById(
             int id,
             HttpRequest req,
             HttpResponse res,
             IFacadeResourceService<Thing, int, ThingResource, ThingResource> thingFacadeService)
         {
-            return thingFacadeService.GetById(id);
+            await res.Negotiate(thingFacadeService.GetById(id));
         }
     }
 }

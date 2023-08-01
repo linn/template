@@ -43,7 +43,6 @@
             this.Response.Content.Headers.ContentType?.ToString().Should().Be("application/json; charset=utf-8");
         }
 
-        // this will fail since we don't have any content negotiation yet
         [Test]
         public void ShouldReturnJsonBody()
         {

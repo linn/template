@@ -25,6 +25,7 @@
                         {
                             services.AddRouting();
                             services.Apply(serviceConfiguration);
+                            services.AddSingleton<IResponseNegotiator, UniversalResponseNegotiator>();
                         })
                     .Configure(
                         app =>

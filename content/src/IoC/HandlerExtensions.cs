@@ -14,7 +14,7 @@
         public static IServiceCollection AddHandlers(this IServiceCollection services)
         {
             return services.AddTransient<UniversalResponseNegotiator>()
-                .AddTransient<IHandler, ThingResourceResultHandler>()
+                .AddTransient<IHandler, JsonResultHandler<ThingResource>>()
                 .AddTransient<IHandler, JsonResultHandler<IEnumerable<ThingResource>>>()
                 .AddTransient<IHandler, JsonResultHandler<ProcessResultResource>>();
         }
