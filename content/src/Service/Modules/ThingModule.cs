@@ -1,15 +1,15 @@
 ﻿namespace Linn.Template.Service.Modules
 {
+    using System.Threading.Tasks;
+
     using Linn.Common.Facade;
     using Linn.Template.Domain.LinnApps;
     using Linn.Template.Resources;
+    using Linn.Template.Service.Extensions;
 
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Routing;
-    using System.Threading.Tasks;
-
-    using Linn.Template.Service.Extensions;
 
     public class ThingModule : IModule
     {
