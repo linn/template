@@ -3,8 +3,6 @@ namespace Linn.Template.Service.Host
     using System.IdentityModel.Tokens.Jwt;
     using System.IO;
 
-    using Carter;
-
     using Linn.Common.Authentication.Host.Extensions;
     using Linn.Common.Configuration;
     using Linn.Common.Logging;
@@ -29,6 +27,7 @@ namespace Linn.Template.Service.Host
 
             services.AddCors();
             services.AddSingleton<IViewLoader, ViewLoader>();
+            services.AddSingleton<IResponseNegotiator, UniversalResponseNegotiator>();
             services.AddCredentialsExtensions();
             services.AddSqsExtensions();
             services.AddLog();

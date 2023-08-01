@@ -7,6 +7,9 @@
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Routing;
+    using System.Threading.Tasks;
+
+    using Linn.Template.Service.Extensions;
 
     public class ThingModule : IModule
     {
@@ -16,10 +19,11 @@
             endpoints.MapGet("/template/things/{id:int}", GetThingById);
         }
 
-        private static dynamic GetThings(
+        private async Task GetThings(
+            HttpResponse res,
             IFacadeResourceService<Thing, int, ThingResource, ThingResource> thingFacadeService)
         {
-            return thingFacadeService.GetAll();
+            await res.Negotiate(thingFacadeService.GetAll());
         }
 
         private static dynamic GetThingById(
