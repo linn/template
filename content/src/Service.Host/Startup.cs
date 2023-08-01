@@ -9,7 +9,9 @@ namespace Linn.Template.Service.Host
     using Linn.Common.Configuration;
     using Linn.Common.Logging;
     using Linn.Template.IoC;
+    using Linn.Template.Service.Extensions;
     using Linn.Template.Service.Host.Negotiators;
+    using Linn.Template.Service.Modules;
 
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Diagnostics;
@@ -36,8 +38,6 @@ namespace Linn.Template.Service.Host
             services.AddPersistence();
             services.AddHandlers();
             services.AddMessageDispatchers();
-
-            services.AddCarter();
 
             services.AddLinnAuthentication(
                 options =>
@@ -87,7 +87,7 @@ namespace Linn.Template.Service.Host
                         await context.Response.WriteAsJsonAsync(response);
                     }));
             app.UseRouting();
-            app.UseEndpoints(cfg => cfg.MapCarter());
+            app.UseEndpoints(builder => { builder.MapEndpoints(); });
         }
     }
 }
