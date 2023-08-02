@@ -16,7 +16,9 @@
             return services.AddTransient<UniversalResponseNegotiator>()
                 .AddTransient<IHandler, JsonResultHandler<ThingResource>>()
                 .AddTransient<IHandler, JsonResultHandler<IEnumerable<ThingResource>>>()
-                .AddTransient<IHandler, JsonResultHandler<ProcessResultResource>>();
+                .AddTransient<IHandler, JsonResultHandler<ProcessResultResource>>()
+                .AddTransient<IHandler, CsvResultHandler<IEnumerable<ThingResource>>>()
+                .AddTransient<IHandler, CsvResultHandler<ThingResource>>();
         }
     }
 }
