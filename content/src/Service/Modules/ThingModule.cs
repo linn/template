@@ -15,8 +15,10 @@
     {
         public void MapEndpoints(IEndpointRouteBuilder endpoints)
         {
-            endpoints.MapGet("template/things", GetThings);
-            endpoints.MapGet("/template/things/{id:int}", GetThingById);
+            endpoints.MapGet("template/things", this.GetThings);
+            endpoints.MapGet("/template/things/{id:int}", this.GetThingById);
+            endpoints.MapPut("/template/things/{id:int}", this.PutThing);
+            endpoints.MapPost("/template/things", this.PostThing);
         }
 
         private async Task GetThings(
@@ -33,6 +35,25 @@
             IFacadeResourceService<Thing, int, ThingResource, ThingResource> thingFacadeService)
         {
             await res.Negotiate(thingFacadeService.GetById(id));
+        }
+
+        private async Task PutThing(
+            int id,
+            HttpRequest req,
+            HttpResponse res,
+            ThingResource resource,
+            IFacadeResourceService<Thing, int, ThingResource, ThingResource> thingFacadeService)
+        {
+            await res.Negotiate(thingFacadeService.Update(id, resource));
+        }
+
+        private async Task PostThing(
+            HttpRequest req,
+            HttpResponse res,
+            ThingResource resource,
+            IFacadeResourceService<Thing, int, ThingResource, ThingResource> thingFacadeService)
+        {
+            await res.Negotiate(thingFacadeService.Add(resource));
         }
     }
 }
