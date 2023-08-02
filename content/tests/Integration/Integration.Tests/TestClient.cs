@@ -3,6 +3,7 @@
     using System;
     using System.Net.Http;
 
+    using Linn.Template.Service;
     using Linn.Template.Service.Extensions;
     using Linn.Template.Service.Modules;
 

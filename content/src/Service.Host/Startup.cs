@@ -9,7 +9,6 @@ namespace Linn.Template.Service.Host
     using Linn.Template.IoC;
     using Linn.Template.Service.Extensions;
     using Linn.Template.Service.Host.Negotiators;
-    using Linn.Template.Service.Modules;
 
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Diagnostics;

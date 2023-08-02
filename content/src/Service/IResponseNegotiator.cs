@@ -1,4 +1,4 @@
-﻿namespace Linn.Template.Service.Extensions
+﻿namespace Linn.Template.Service
 {
     using System.Threading;
     using System.Threading.Tasks;
