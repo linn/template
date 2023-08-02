@@ -5,7 +5,6 @@
     using Linn.Common.Facade.Carter;
     using Linn.Common.Facade.Carter.Handlers;
     using Linn.Template.Resources;
-    using Linn.Template.Service.ResultHandlers;
 
     using Microsoft.Extensions.DependencyInjection;
 
