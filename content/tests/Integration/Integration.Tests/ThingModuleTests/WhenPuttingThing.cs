@@ -13,7 +13,7 @@
 
     using NUnit.Framework;
 
-    public class WhenUpdatingAThing : ContextBase
+    public class WhenPuttingThing : ContextBase
     {
         private ThingResource resource;
 
@@ -27,7 +27,7 @@
             this.resource = new ThingResource { Id = this.thingId, Name = "new name" };
 
             this.ThingRepository
-                .FindById(this.thingId).Returns(new Thing {Id = this.thingId, Name = "new name"});
+                .FindById(this.thingId).Returns(new Thing { Id = this.thingId, Name = "new name" });
 
             this.Response = this.Client.PutAsJsonAsync(
                 $"/template/things/{this.thingId}",

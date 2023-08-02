@@ -12,26 +12,19 @@
 
     using NUnit.Framework;
 
-    public class WhenGettingAThing : ContextBase
+    public class WhenGettingThing : ContextBase
     {
-        private int thingId;
-
-        private Thing thing;
-
         [SetUp]
         public void SetUp()
         {
-            this.thingId = 1;
-            this.thing = new Thing { Id = this.thingId };
-
-            this.ThingRepository.FindById(this.thingId).Returns(this.thing);
+            this.ThingRepository.FindById(1).Returns(new Thing { Id = 1 });
 
             this.Response = this.Client.Get(
-                $"/template/things/{this.thingId}",
+                "/template/things/1",
                 with =>
                     {
                         with.Accept("application/json");
-            }).Result;
+                    }).Result;
         }
 
         [Test]
@@ -44,7 +37,7 @@
         public void ShouldReturnJsonContentType()
         {
             this.Response.Content.Headers.ContentType.Should().NotBeNull();
-            this.Response.Content.Headers.ContentType.ToString().Should().Be("application/json");
+            this.Response.Content.Headers.ContentType?.ToString().Should().Be("application/json");
         }
 
         [Test]
@@ -52,8 +45,7 @@
         {
             var resource = this.Response.DeserializeBody<ThingResource>();
             resource.Should().NotBeNull();
-
-            resource.Id.Should().Be(this.thingId);
+            resource.Id.Should().Be(1);
         }
     }
 }

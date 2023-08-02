@@ -12,6 +12,8 @@
     {
         public ThingResource Build(Thing thing, IEnumerable<string> claims)
         {
+            var links = this.BuildLinks(thing, claims).ToArray();
+
             return new ThingResource
             {
                 Id = thing.Id,
@@ -22,7 +24,7 @@
                              {
                                  Description = d.Description, DetailId = d.DetailId, ThingId = d.ThingId
                              }),
-                Links = this.BuildLinks(thing, claims).ToArray()
+                Links = links
             };
         }
 

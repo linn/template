@@ -1,6 +1,7 @@
 ﻿namespace Linn.Template.Integration.Tests.ThingModuleTests
 {
     using System.Collections.Generic;
+    using System.Linq;
     using System.Net;
     using System.Net.Http.Json;
 
@@ -14,7 +15,7 @@
 
     using NUnit.Framework;
 
-    public class WhenAddingAThing : ContextBase
+    public class WhenPostingThing : ContextBase
     {
         private Thing thing;
 
@@ -25,9 +26,9 @@
         {
             this.resource = new ThingResource
                                 {
-                                    Id = 123, 
-                                    Name = "new", 
-                                    Code = new ThingCodeResource(), 
+                                    Id = 123,
+                                    Name = "new",
+                                    Code = new ThingCodeResource(),
                                     Details = new List<ThingDetailResource>()
                                 };
             this.thing = new Thing { Id = 123, Name = "new" };
@@ -46,13 +47,6 @@
         }
 
         [Test]
-        public void ShouldReturnLocationHeader()
-        {
-            this.Response.Headers.Location.Should().NotBeNull();
-            this.Response.Headers.Location.Should().Be("/template/things/123");
-        }
-
-        [Test]
         public void ShouldReturnJsonContentType()
         {
             this.Response.Content.Headers.ContentType.Should().NotBeNull();
@@ -62,11 +56,12 @@
         [Test]
         public void ShouldReturnJsonBody()
         {
-            var resources = this.Response.DeserializeBody<ThingResource>();
-            resources.Should().NotBeNull();
+            var resource = this.Response.DeserializeBody<ThingResource>();
+            resource.Should().NotBeNull();
 
-            resources.Id.Should().Be(123);
-            resources.Name.Should().Be("new");
+            resource.Id.Should().Be(123);
+            resource.Name.Should().Be("new");
+            resource.Links.First().Rel.Should().Be("self");
         }
     }
 }

@@ -3,7 +3,9 @@
     using System;
     using System.Net.Http;
 
-    using Carter;
+    using Linn.Template.Service;
+    using Linn.Template.Service.Extensions;
+    using Linn.Template.Service.Modules;
 
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
@@ -15,7 +17,7 @@
     {
         public static HttpClient With<T>(
             Action<IServiceCollection> serviceConfiguration, 
-            params Func<RequestDelegate, RequestDelegate>[] _) where T : ICarterModule
+            params Func<RequestDelegate, RequestDelegate>[] _) where T : IModule
         {
             var server = new TestServer(
                 new WebHostBuilder()
@@ -24,14 +26,13 @@
                         {
                             services.AddRouting();
                             services.Apply(serviceConfiguration);
-                            services.AddCarter(configurator: c =>
-                                c.WithModule<T>());
+                            services.AddSingleton<IResponseNegotiator, UniversalResponseNegotiator>();
                         })
                     .Configure(
                         app =>
                             {
                                 app.UseRouting();
-                                app.UseEndpoints(cfg => cfg.MapCarter());
+                                app.UseEndpoints(builder => { builder.MapEndpoints(); });
                             }));
 
             return server.CreateClient();

@@ -3,12 +3,11 @@ namespace Linn.Template.Service.Host
     using System.IdentityModel.Tokens.Jwt;
     using System.IO;
 
-    using Carter;
-
     using Linn.Common.Authentication.Host.Extensions;
     using Linn.Common.Configuration;
     using Linn.Common.Logging;
     using Linn.Template.IoC;
+    using Linn.Template.Service.Extensions;
     using Linn.Template.Service.Host.Negotiators;
 
     using Microsoft.AspNetCore.Builder;
@@ -27,6 +26,7 @@ namespace Linn.Template.Service.Host
 
             services.AddCors();
             services.AddSingleton<IViewLoader, ViewLoader>();
+            services.AddSingleton<IResponseNegotiator, UniversalResponseNegotiator>();
             services.AddCredentialsExtensions();
             services.AddSqsExtensions();
             services.AddLog();
@@ -36,8 +36,6 @@ namespace Linn.Template.Service.Host
             services.AddPersistence();
             services.AddHandlers();
             services.AddMessageDispatchers();
-
-            services.AddCarter();
 
             services.AddLinnAuthentication(
                 options =>
@@ -87,7 +85,7 @@ namespace Linn.Template.Service.Host
                         await context.Response.WriteAsJsonAsync(response);
                     }));
             app.UseRouting();
-            app.UseEndpoints(cfg => cfg.MapCarter());
+            app.UseEndpoints(builder => { builder.MapEndpoints(); });
         }
     }
 }
