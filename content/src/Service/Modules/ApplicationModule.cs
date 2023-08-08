@@ -2,18 +2,17 @@
 {
     using System.Threading.Tasks;
 
-    using Carter;
-    using Carter.Response;
-
+    using Linn.Common.Service;
+    using Linn.Common.Service.Core.Extensions;
     using Linn.Template.Service.Models;
 
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Routing;
 
-    public class ApplicationModule : ICarterModule
+    public class ApplicationModule : IModule
     {
-        public void AddRoutes(IEndpointRouteBuilder app)
+        public void MapEndpoints(IEndpointRouteBuilder app)
         {
             app.MapGet("/", this.Redirect);
             app.MapGet("/template", this.GetApp);

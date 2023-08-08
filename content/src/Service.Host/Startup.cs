@@ -4,11 +4,12 @@ namespace Linn.Template.Service.Host
     using System.IO;
 
     using Linn.Common.Authentication.Host.Extensions;
-    using Linn.Common.Configuration;
     using Linn.Common.Logging;
+    using Linn.Common.Service.Core;
+    using Linn.Common.Service.Core.Extensions;
     using Linn.Template.IoC;
-    using Linn.Template.Service.Extensions;
     using Linn.Template.Service.Host.Negotiators;
+    using Linn.Template.Service.Models;
 
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Diagnostics;
@@ -26,7 +27,9 @@ namespace Linn.Template.Service.Host
 
             services.AddCors();
             services.AddSingleton<IViewLoader, ViewLoader>();
+            services.AddSingleton<IResponseNegotiator, HtmlNegotiator>();
             services.AddSingleton<IResponseNegotiator, UniversalResponseNegotiator>();
+
             services.AddCredentialsExtensions();
             services.AddSqsExtensions();
             services.AddLog();
@@ -40,7 +43,7 @@ namespace Linn.Template.Service.Host
             services.AddLinnAuthentication(
                 options =>
                     {
-                        options.Authority = ConfigurationManager.Configuration["AUTHORITY_URI"];
+                        options.Authority = ApplicationSettings.Get().AuthorityUri;
                         options.CallbackPath = new PathString("/template/signin-oidc");
                         options.CookiePath = "/template";
                     });

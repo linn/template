@@ -4,11 +4,10 @@ namespace Linn.Template.Service.Host.Negotiators
     using System.Threading;
     using System.Threading.Tasks;
 
-    using Carter;
-
     using HandlebarsDotNet;
 
     using Linn.Common.Configuration;
+    using Linn.Common.Service.Core;
     using Linn.Template.Service.Models;
 
     using Microsoft.AspNetCore.Http;

@@ -2,8 +2,8 @@
 {
     using System.Collections.Generic;
 
-    using Linn.Common.Facade.Carter;
-    using Linn.Common.Facade.Carter.Handlers;
+    using Linn.Common.Service.Core;
+    using Linn.Common.Service.Core.Handlers;
     using Linn.Template.Resources;
 
     using Microsoft.Extensions.DependencyInjection;
@@ -12,7 +12,7 @@
     {
         public static IServiceCollection AddHandlers(this IServiceCollection services)
         {
-            return services.AddTransient<UniversalResponseNegotiator>()
+            return services
                 .AddTransient<IHandler, JsonResultHandler<ThingResource>>()
                 .AddTransient<IHandler, JsonResultHandler<IEnumerable<ThingResource>>>()
                 .AddTransient<IHandler, JsonResultHandler<ProcessResultResource>>()

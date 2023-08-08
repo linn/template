@@ -3,7 +3,7 @@
     using System;
     using System.Linq;
 
-    using Linn.Common.Facade.Carter.Handlers;
+    using Linn.Common.Service.Core.Handlers;
     using Linn.Template.Resources;
 
     public class ThingResourceResultHandler : JsonResultHandler<ThingResource>
