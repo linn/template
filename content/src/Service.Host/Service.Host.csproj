@@ -28,7 +28,9 @@
 		<None Remove="node_modules\**" />
 	</ItemGroup>
 	<ItemGroup>
-		<PackageReference Include="handlebars.net" Version="2.1.4" />
+	  <Content Remove="views\Index.cshtml" />
+	</ItemGroup>
+	<ItemGroup>
 		<PackageReference Include="Linn.Common.Authentication.Host" Version="3.1.0" />
 		<PackageReference Include="Linn.Common.Configuration" Version="2.0.0" />
 		<PackageReference Include="Linn.Common.Logging" Version="2.0.0" />
@@ -41,5 +43,8 @@
 		<Folder Include="client\src\components\__tests__\" />
 		<Folder Include="client\src\reducers\__tests__\" />
 		<Folder Include="client\src\selectors\__tests__\" />
+	</ItemGroup>
+	<ItemGroup>
+	  <None Include="views\Index.cshtml" />
 	</ItemGroup>
 </Project>

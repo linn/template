@@ -4,9 +4,8 @@ namespace Linn.Template.Service.Host.Negotiators
     using System.Threading;
     using System.Threading.Tasks;
 
-    using HandlebarsDotNet;
-
     using Linn.Common.Configuration;
+    using Linn.Common.Pdf;
     using Linn.Common.Service.Core;
     using Linn.Template.Service.Models;
 
@@ -20,9 +19,12 @@ namespace Linn.Template.Service.Host.Negotiators
     {
         private readonly IViewLoader viewLoader;
 
-        public HtmlNegotiator(IViewLoader viewLoader)
+        private readonly ITemplateEngine templateEngine;
+
+        public HtmlNegotiator(IViewLoader viewLoader, ITemplateEngine templateEngine)
         {
             this.viewLoader = viewLoader;
+            this.templateEngine = templateEngine;
         }
 
         public bool CanHandle(MediaTypeHeaderValue accept)
@@ -34,15 +36,11 @@ namespace Linn.Template.Service.Host.Negotiators
         {
             var viewName = model is ViewResponse viewResponse
                 ? viewResponse.ViewName
-                : "Index.html";
+                : "Index.cshtml";
 
             var view = this.viewLoader.Load(viewName);
 
-            var template = Handlebars.Compile(view);
-
-            var viewModel = new
-            {
-                Settings = JsonConvert.SerializeObject(
+            var jsonModel = JsonConvert.SerializeObject(
                     new
                     {
                         AuthorityUri = ConfigurationManager.Configuration["AUTHORITY_URI"],
@@ -50,13 +48,17 @@ namespace Linn.Template.Service.Host.Negotiators
                         ProxyRoot = ConfigurationManager.Configuration["PROXY_ROOT"],
                     },
                     Formatting.Indented,
-                    new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() })
-            };
+                    new JsonSerializerSettings
+                        {
+                            ContractResolver = new CamelCasePropertyNamesContractResolver()
+                        });
+
+            var compiled = this.templateEngine.Render(jsonModel, view).Result;
 
             res.ContentType = "text/html";
             res.StatusCode = (int)HttpStatusCode.OK;
 
-            await res.WriteAsync(template(viewModel), cancellationToken);
+            await res.WriteAsync(compiled, cancellationToken);
         }
     }
 }

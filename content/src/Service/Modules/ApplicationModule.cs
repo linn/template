@@ -28,7 +28,7 @@
 
         private async Task GetApp(HttpRequest req, HttpResponse res)
         {
-            await res.Negotiate(new ViewResponse { ViewName = "Index.html" });
+            await res.Negotiate(new ViewResponse { ViewName = "Index.cshtml" });
         }
 
         private async Task GetSilentRenew(HttpRequest req, HttpResponse res)
