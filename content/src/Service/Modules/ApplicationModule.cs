@@ -2,18 +2,17 @@
 {
     using System.Threading.Tasks;
 
-    using Carter;
-    using Carter.Response;
-
+    using Linn.Common.Service.Core;
+    using Linn.Common.Service.Core.Extensions;
     using Linn.Template.Service.Models;
 
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Routing;
 
-    public class ApplicationModule : ICarterModule
+    public class ApplicationModule : IModule
     {
-        public void AddRoutes(IEndpointRouteBuilder app)
+        public void MapEndpoints(IEndpointRouteBuilder app)
         {
             app.MapGet("/", this.Redirect);
             app.MapGet("/template", this.GetApp);
@@ -29,7 +28,7 @@
 
         private async Task GetApp(HttpRequest req, HttpResponse res)
         {
-            await res.Negotiate(new ViewResponse { ViewName = "Index.html" });
+            await res.Negotiate(new ViewResponse { ViewName = "Index.cshtml" });
         }
 
         private async Task GetSilentRenew(HttpRequest req, HttpResponse res)

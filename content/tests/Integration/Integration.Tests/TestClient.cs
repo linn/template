@@ -3,9 +3,9 @@
     using System;
     using System.Net.Http;
 
-    using Linn.Template.Service;
-    using Linn.Template.Service.Extensions;
-    using Linn.Template.Service.Modules;
+    using Linn.Common.Service;
+    using Linn.Common.Service.Core;
+    using Linn.Common.Service.Core.Extensions;
 
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
@@ -32,7 +32,21 @@
                         app =>
                             {
                                 app.UseRouting();
-                                app.UseEndpoints(builder => { builder.MapEndpoints(); });
+                                app.UseEndpoints(
+                                    builder =>
+                                        {
+                                            // only map the endpoints for the module under test 
+                                            var module
+                                                =
+                                                (T)Activator.CreateInstance(typeof(T)); // i.e. the module of type T
+                                            module.MapEndpoints(builder);
+
+                                            // we have to do the above since our testing context only
+                                            // injects the dependencies for the module under test...
+                                            // so if we try to MapEndpoints() for all modules like we do in the
+                                            // real/non-testing scenario the framework complains since other module's
+                                            // dependencies are missing.
+                                        });
                             }));
 
             return server.CreateClient();

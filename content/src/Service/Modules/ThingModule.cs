@@ -3,9 +3,10 @@
     using System.Threading.Tasks;
 
     using Linn.Common.Facade;
+    using Linn.Common.Service.Core;
+    using Linn.Common.Service.Core.Extensions;
     using Linn.Template.Domain.LinnApps;
     using Linn.Template.Resources;
-    using Linn.Template.Service.Extensions;
 
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Http;
@@ -15,7 +16,7 @@
     {
         public void MapEndpoints(IEndpointRouteBuilder endpoints)
         {
-            endpoints.MapGet("template/things", this.GetThings);
+            endpoints.MapGet("/template/things", this.GetThings);
             endpoints.MapGet("/template/things/{id:int}", this.GetThingById);
             endpoints.MapPut("/template/things/{id:int}", this.PutThing);
             endpoints.MapPost("/template/things", this.PostThing);
