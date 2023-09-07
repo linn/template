@@ -145,6 +145,11 @@ Resources:
             Command:
               - "CMD-SHELL"
               - "curl -f http://localhost:5050/healthcheck || exit 1"
+          DockerLabels:
+            traefik.enable: true
+            traefik.http.routers.template.entrypoints: web
+            traefik.http.routers.template.rule: "PathPrefix(`/template`)"
+            traefik.http.services.template.loadbalancer.healthcheck.path: "/healthcheck"
           LogConfiguration:
             LogDriver: gelf
             Options:
@@ -267,13 +272,6 @@ Resources:
         - Field: instanceId
           Type: spread
       TaskDefinition: !Ref templateTaskDefinition
-      Role: ecsServiceRole
-      LoadBalancers:
-        - ContainerName: template
-          ContainerPort: 5050
-          TargetGroupArn:
-            Fn::ImportValue:
-              !Sub "template-target-group-arn${environmentSuffix}"
   templateMessagingService:
     Type: AWS::ECS::Service
     Properties:
