@@ -1,6 +1,9 @@
 ﻿FROM mcr.microsoft.com/dotnet/runtime:7.0
 FROM mcr.microsoft.com/dotnet/aspnet:7.0
 
+RUN apt-get update && apt-get install -y curl
+RUN rm -rf /var/lib/apt/lists/*
+
 ARG gitBranch=unspecified
 ENV TZ=Europe/London
 
