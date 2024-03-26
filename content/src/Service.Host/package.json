@@ -12,24 +12,6 @@
     "test:watch": "jest --watch",
     "eslint-check": "eslint --print-config . | eslint-config-prettier-check"
   },
-  "jest": {
-    "coverageDirectory": "./coverage/",
-    "collectCoverageFrom": [
-      "client/src/**/*.{js}"
-    ],
-    "collectCoverage": true,
-    "setupFiles": [
-      "./setupJest.js",
-      "raf/polyfill"
-    ],
-    "testPathIgnorePatterns": [
-      "./client/src/components/__tests__/fakeData/*"
-    ],
-    "transform": {
-      "^.+\\.js$": "babel-jest",
-      ".+\\.(css|scss|png|jpg|svg)$": "jest-transform-stub"
-    }
-  },
   "author": "",
   "license": "ISC",
   "devDependencies": {
@@ -65,7 +47,6 @@
     "jest-environment-jsdom": "^29.6.2",
     "jest-environment-jsdom-sixteen": "^2.0.0",
     "jest-transform-stub": "^2.0.0",
-    "node-sass": "^9.0.0",
     "postcss": "^8.4.27",
     "postcss-loader": "^7.3.3",
     "prettier": "^3.0.0",
@@ -94,7 +75,6 @@
     "assert": "^2.0.0",
     "browserify-zlib": "^0.2.0",
     "buffer": "^6.0.3",
-    "connected-react-router": "^6.9.3",
     "core-js": "^3.32.0",
     "decimal.js": "^10.4.3",
     "history": "^5.3.0",

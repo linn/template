@@ -74,6 +74,12 @@ namespace Linn.Template.Service.Host
             app.UseAuthentication();
 
             app.UseBearerTokenAuthentication();
+            app.Use(
+                (context, next) =>
+                    {
+                        context.Response.Headers.Add("Vary", "Accept");
+                        return next.Invoke();
+                    });
             app.UseExceptionHandler(
                 c => c.Run(async context =>
                     {
