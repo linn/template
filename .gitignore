@@ -68,3 +68,5 @@ prod-update.sh
 src/Service.Host/client/build/
 *.nupkg
 
+src/Service.Host/Service.Host.sln
+*.idea*

@@ -40,12 +40,12 @@ namespace Linn.Template.Service.Host.Negotiators
 
             var view = this.viewLoader.Load(viewName);
 
-            var jsonModel = JsonConvert.SerializeObject(
+            var jsonAppSettings = JsonConvert.SerializeObject(
                     new
                     {
                         AuthorityUri = ConfigurationManager.Configuration["AUTHORITY_URI"],
                         AppRoot = ConfigurationManager.Configuration["APP_ROOT"],
-                        ProxyRoot = ConfigurationManager.Configuration["PROXY_ROOT"],
+                        ProxyRoot = ConfigurationManager.Configuration["PROXY_ROOT"]
                     },
                     Formatting.Indented,
                     new JsonSerializerSettings
@@ -53,7 +53,12 @@ namespace Linn.Template.Service.Host.Negotiators
                             ContractResolver = new CamelCasePropertyNamesContractResolver()
                         });
 
-            var compiled = this.templateEngine.Render(jsonModel, view).Result;
+            var viewModel = new ViewModel
+                                {
+                                    AppSettings = jsonAppSettings,
+                                    BuildNumber = ConfigurationManager.Configuration["BUILD_NUMBER"]
+                                };
+            var compiled = this.templateEngine.Render(viewModel, view).Result;
 
             res.ContentType = "text/html";
             res.StatusCode = (int)HttpStatusCode.OK;
