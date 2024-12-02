@@ -77,7 +77,7 @@ namespace Linn.Template.Service.Host
             app.Use(
                 (context, next) =>
                     {
-                        context.Response.Headers.Add("Vary", "Accept");
+                        context.Response.Headers.Append("Vary", "Accept");
                         return next.Invoke();
                     });
             app.UseExceptionHandler(
