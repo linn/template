@@ -12,8 +12,8 @@
         public static IServiceCollection AddPersistence(this IServiceCollection services)
         {
             return services.AddScoped<ServiceDbContext>()
-                .AddTransient<DbContext>(a => a.GetService<ServiceDbContext>())
-                .AddTransient<ITransactionManager, TransactionManager>();
+                .AddScoped<DbContext>(a => a.GetService<ServiceDbContext>())
+                .AddScoped<ITransactionManager, TransactionManager>();
         }
     }
 }

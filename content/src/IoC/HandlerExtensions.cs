@@ -13,11 +13,11 @@
         public static IServiceCollection AddHandlers(this IServiceCollection services)
         {
             return services
-                .AddTransient<IHandler, JsonResultHandler<ThingResource>>()
-                .AddTransient<IHandler, JsonResultHandler<IEnumerable<ThingResource>>>()
-                .AddTransient<IHandler, JsonResultHandler<ProcessResultResource>>()
-                .AddTransient<IHandler, CsvResultHandler<IEnumerable<ThingResource>>>()
-                .AddTransient<IHandler, CsvResultHandler<ThingResource>>();
+                .AddScoped<IHandler, JsonResultHandler<ThingResource>>()
+                .AddScoped<IHandler, JsonResultHandler<IEnumerable<ThingResource>>>()
+                .AddScoped<IHandler, JsonResultHandler<ProcessResultResource>>()
+                .AddScoped<IHandler, CsvResultHandler<IEnumerable<ThingResource>>>()
+                .AddScoped<IHandler, CsvResultHandler<ThingResource>>();
         }
     }
 }
