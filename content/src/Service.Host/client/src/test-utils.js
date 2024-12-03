@@ -20,7 +20,6 @@ jest.mock('react-oidc-context', () => ({
 
 useAuth.mockImplementation(() => ({ signinRedirect: jest.fn() }));
 
-useAuth.mockImplementation(() => ({ signinRedirect: jest.fn() }));
 // eslint-disable-next-line react/prop-types
 const Providers = ({ children }) => {
     global.fetch = jest.fn(() =>
