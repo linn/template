@@ -5,7 +5,7 @@ namespace Linn.Template.Service.Host.Negotiators
     using System.Threading.Tasks;
 
     using Linn.Common.Configuration;
-    using Linn.Common.Pdf;
+    using Linn.Common.Rendering;
     using Linn.Common.Service.Core;
     using Linn.Template.Service.Models;
 
