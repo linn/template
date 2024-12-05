@@ -1,12 +1,14 @@
 import { useState } from 'react';
 import { utilities } from '@linn-it/linn-form-components-library';
 import { useAuth } from 'react-oidc-context';
-import history from '../history';
+import { useNavigate } from 'react-router-dom';
 
 function usePost(url, requiresAuth = false, redirectOnSuccess = false) {
     const [isLoading, setIsLoading] = useState(false);
     const [errorMessage, setErrorMessage] = useState(null);
     const [postResult, setPostResult] = useState(null);
+
+    const navigate = useNavigate();
 
     let token = '';
 
@@ -40,7 +42,7 @@ function usePost(url, requiresAuth = false, redirectOnSuccess = false) {
             setIsLoading(false);
             if (redirectOnSuccess) {
                 // redirect to the rel:self link of the result
-                history.push(utilities.getSelfHref(result));
+                navigate.push(utilities.getSelfHref(result));
             }
         } else {
             const text = await response.text();

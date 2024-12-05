@@ -1,4 +1,6 @@
-﻿import React from 'react';
+﻿/* eslint-disable react/jsx-props-no-spreading */
+
+import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { SnackbarProvider } from 'notistack';
 import { ThemeProvider, StyledEngineProvider } from '@mui/material/styles';
@@ -6,11 +8,11 @@ import { linnTheme } from '@linn-it/linn-form-components-library';
 import { AuthProvider } from 'react-oidc-context';
 import { WebStorageStateStore } from 'oidc-client-ts';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { BrowserRouter } from 'react-router-dom';
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import Root from './components/Root';
 import 'typeface-roboto';
 import config from './config';
-import history from './history';
 
 const container = document.getElementById('root');
 const root = createRoot(container);
@@ -27,10 +29,10 @@ const oidcConfig = {
     onSigninCallback: () => {
         const redirect = sessionStorage.getItem('auth:redirect');
         if (redirect) {
-            history.push(redirect);
+            window.location.href = redirect;
             sessionStorage.removeItem('auth:redirect');
         } else {
-            history.push(`${host}/template`);
+            window.location.href = `${host}/template`;
         }
     },
     userStore: new WebStorageStateStore({ store: window.localStorage })
@@ -38,18 +40,19 @@ const oidcConfig = {
 
 const render = Component => {
     root.render(
-        //eslint-disable-next-line react/jsx-props-no-spreading
-        <AuthProvider {...oidcConfig}>
-            <StyledEngineProvider injectFirst>
-                <ThemeProvider theme={linnTheme}>
-                    <SnackbarProvider dense maxSnack={5}>
-                        <LocalizationProvider dateAdapter={AdapterMoment} locale="en-GB">
-                            <Component />
-                        </LocalizationProvider>
-                    </SnackbarProvider>
-                </ThemeProvider>
-            </StyledEngineProvider>
-        </AuthProvider>
+        <BrowserRouter>
+            <AuthProvider {...oidcConfig}>
+                <StyledEngineProvider injectFirst>
+                    <ThemeProvider theme={linnTheme}>
+                        <SnackbarProvider dense maxSnack={5}>
+                            <LocalizationProvider dateAdapter={AdapterMoment} locale="en-GB">
+                                <Component />
+                            </LocalizationProvider>
+                        </SnackbarProvider>
+                    </ThemeProvider>
+                </StyledEngineProvider>
+            </AuthProvider>
+        </BrowserRouter>
     );
 };
 

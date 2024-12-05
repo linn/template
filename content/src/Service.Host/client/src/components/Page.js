@@ -10,6 +10,7 @@ import PropTypes from 'prop-types';
 import { Breadcrumbs, Loading } from '@linn-it/linn-form-components-library';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -45,7 +46,6 @@ const columnWidth = {
 
 function Page({
     children,
-    history,
     width,
     requestErrors,
     showRequestErrors,
@@ -54,6 +54,8 @@ function Page({
     showAuthUi
 }) {
     const classes = useStyles();
+    const navigate = useNavigate();
+    const location = useLocation();
     const { enqueueSnackbar } = useSnackbar();
     useEffect(() => {
         if (requestErrors && showRequestErrors) {
@@ -104,7 +106,7 @@ function Page({
             <Grid item xs={10} className="hide-when-printing">
                 {showBreadcrumbs && (
                     <div style={{ marginTop: '80px' }}>
-                        <Breadcrumbs history={history} homeUrl={homeUrl} />
+                        <Breadcrumbs navigate={navigate} location={location} homeUrl={homeUrl} />
                     </div>
                 )}
             </Grid>
@@ -126,7 +128,6 @@ function Page({
 
 Page.propTypes = {
     children: PropTypes.node.isRequired,
-    history: PropTypes.shape({}).isRequired,
     width: PropTypes.oneOf(['xs', 's', 'm', 'l', 'xl']),
     showRequestErrors: PropTypes.bool,
     requestErrors: PropTypes.arrayOf(PropTypes.shape({})),
