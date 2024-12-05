@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using Linn.Common.Logging;
 using Linn.Common.Messaging.RabbitMQ.Configuration;
 using Linn.Common.Messaging.RabbitMQ.Handlers;
-using Linn.Template.Messaging.Handlers;
 using Linn.Template.Messaging.Messages;
 
 using Microsoft.Extensions.Hosting;
@@ -31,14 +30,12 @@ public class Listener : BackgroundService
     public Listener(
         EventingBasicConsumer consumer,
         ChannelConfiguration channelConfiguration,
-        Handler<ThingMessage> thingMessageHandler,
         ILog logger)
     {
         this.queueName = "template";
         this.consumer = consumer;
         this.logger = logger;
         this.channelConfiguration = channelConfiguration;
-        this.thingMessageHandler = thingMessageHandler;
         this.channel = this.channelConfiguration.ConsumerChannel;
     }
 
@@ -52,8 +49,6 @@ public class Listener : BackgroundService
                 // or log errors and return false if unsuccessful
                 bool success = ea.RoutingKey switch
                     {
-                        ThingMessage.RoutingKey => thingMessageHandler.Handle(
-                            new ThingMessage(ea)),
                         _ => false
                     };
 
