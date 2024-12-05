@@ -12,7 +12,7 @@ function Root() {
 
     return (
         <div>
-            <div className="padding-top-when-not-printing">
+            <div>
                 <Navigation />
                 <Routes>
                     <Route path="/" element={<Navigate to="/template" replace />} />
