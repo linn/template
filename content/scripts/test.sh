@@ -5,8 +5,8 @@ set -ev
 if [ "$CI" ] && [ "$TRAVIS" ]
 then 
 	source ~/.nvm/nvm.sh; 
-	nvm install 16;
-	nvm use 16;
+	nvm install 20;
+	nvm use 20;
 fi
 
 # c# tests
