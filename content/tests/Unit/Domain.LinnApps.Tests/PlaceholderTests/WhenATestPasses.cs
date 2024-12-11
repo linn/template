@@ -1,4 +1,4 @@
-﻿namespace Linn.Template.Domain.LinnApps.Tests.PlayTests
+﻿namespace Linn.Template.Domain.LinnApps.Tests.PlaceholderTests
 {
     using FluentAssertions;
 
