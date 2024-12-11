@@ -6,7 +6,7 @@ Linn Template Solution.
 
 Install: `dotnet new -i Linn.Template`
 
-Create new solution: `dotnet new Linn.Template -n {namespace} -s {solutionFileName}` 
+Create new solution: `dotnet new linntemplate -n {namespace} -s {solutionFileName}` 
 
 e.g. `dotnet new Linn.Template -n Linn.Events -s Events.sln`
 
