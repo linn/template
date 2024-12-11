@@ -13,7 +13,7 @@
         public static IServiceCollection AddHandlers(this IServiceCollection services)
         {
             return services
-                .AddScoped<IHandler, JsonResultHandler<ProcessResultResource>>();
+                .AddSingleton<IHandler, JsonResultHandler<ProcessResultResource>>();
         }
     }
 }
