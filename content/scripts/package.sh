@@ -2,7 +2,7 @@
 set -ev
 
 # build dotnet application
-dotnet publish ./src/Service.Host/ -c release
+dotnet publish
 # dotnet publish ./src/Messaging.Host/ -c release
 # dotnet publish ./src/Scheduling.Host/ -c release
 
