@@ -10,7 +10,7 @@ import Page from '../containers/Page';
 function TestPage() {
     const navigate = useNavigate();
     return (
-        <Page showBreadcrumbs={true}>
+        <Page>
             <Grid container spacing={3}>
                 <Grid size={12}>
                     <Typography variant="h4">Test Page!!</Typography>

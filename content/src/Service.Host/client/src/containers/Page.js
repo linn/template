@@ -9,7 +9,7 @@ function PageContainer({
     showRequestErrors = false,
     width = 'l',
     title = null,
-    defaultAppTitle = 'finance'
+    defaultAppTitle = 'template'
 }) {
     const location = useLocation();
     const navigate = useNavigate();

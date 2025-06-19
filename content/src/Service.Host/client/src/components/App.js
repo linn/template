@@ -9,7 +9,7 @@ import Page from '../containers/Page';
 
 function App() {
     return (
-        <Page showBreadcrumbs={false}>
+        <Page>
             <Grid container spacing={3}>
                 <Grid size={12}>
                     <Typography variant="h4">Template</Typography>

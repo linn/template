@@ -4,7 +4,7 @@ import Page from '../containers/Page';
 
 export default function NotFoundPage() {
     return (
-        <Page showBreadcrumbs={true}>
+        <Page>
             <NotFound />
         </Page>
     );
