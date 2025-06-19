@@ -1,5 +1,6 @@
 ﻿namespace Linn.Template.IoC
 {
+    using Linn.Common.Facade;
     using Linn.Common.Rendering;
 
     using Microsoft.Extensions.DependencyInjection;
@@ -8,7 +9,7 @@
 
     public static class ServiceExtensions
     {
-        public static IServiceCollection AddFacade(this IServiceCollection services)
+        public static IServiceCollection AddFacadeServices(this IServiceCollection services)
         {
             return services;
         }
@@ -18,6 +19,11 @@
             return services
                 .AddSingleton<IRazorEngine, RazorEngine>()
                 .AddSingleton<ITemplateEngine, RazorTemplateEngine>();
+        }
+
+        public static IServiceCollection AddBuilders(this IServiceCollection services)
+        {
+            return services;
         }
     }
 }
