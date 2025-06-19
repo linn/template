@@ -5,13 +5,12 @@ import List from '@mui/material/List';
 import { Grid } from '@mui/material';
 
 import ListItem from '@mui/material/ListItem';
-import config from '../config';
-import Page from './Page';
+import Page from '../containers/Page';
 
 function TestPage() {
     const navigate = useNavigate();
     return (
-        <Page homeUrl={config.appRoot}>
+        <Page showBreadcrumbs={true}>
             <Grid container spacing={3}>
                 <Grid size={12}>
                     <Typography variant="h4">Test Page!!</Typography>
