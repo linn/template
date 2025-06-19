@@ -12,10 +12,10 @@ function App() {
     return (
         <Page homeUrl={config.appRoot}>
             <Grid container spacing={3}>
-                <Grid item xs={12}>
+                <Grid size={12}>
                     <Typography variant="h4">Template</Typography>
                 </Grid>
-                <Grid item xs={12}>
+                <Grid size={12}>
                     <List>
                         <ListItem component={Link} to="/test">
                             <Typography color="primary">Test Page</Typography>
