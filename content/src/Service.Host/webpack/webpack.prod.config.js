@@ -7,7 +7,7 @@ module.exports = {
     },
     mode: 'production',
     output: {
-        path: path.resolve(__dirname, '../client/build'), // string
+        path: path.resolve(__dirname, '../client/build'),
         filename: '[name].js',
         publicPath: '/template/build/'
     },
