@@ -1,6 +1,5 @@
 ﻿namespace Linn.Template.IoC
 {
-    using Linn.Common.Facade;
     using Linn.Common.Rendering;
 
     using Microsoft.Extensions.DependencyInjection;

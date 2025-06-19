@@ -5,8 +5,8 @@ import List from '@mui/material/List';
 import { Grid } from '@mui/material';
 
 import ListItem from '@mui/material/ListItem';
-import Page from './Page';
 import config from '../config';
+import Page from './Page';
 
 function App() {
     return (
