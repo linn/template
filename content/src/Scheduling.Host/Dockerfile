@@ -1,5 +1,4 @@
-FROM mcr.microsoft.com/dotnet/runtime:8.0
-FROM mcr.microsoft.com/dotnet/aspnet:8.0
+FROM mcr.microsoft.com/dotnet/aspnet:9.0
 
 ENV TZ=Europe/London
 
