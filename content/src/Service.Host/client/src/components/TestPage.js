@@ -5,18 +5,17 @@ import List from '@mui/material/List';
 import { Grid } from '@mui/material';
 
 import ListItem from '@mui/material/ListItem';
-import Page from './Page';
-import config from '../config';
+import Page from '../containers/Page';
 
 function TestPage() {
     const navigate = useNavigate();
     return (
-        <Page homeUrl={config.appRoot}>
+        <Page>
             <Grid container spacing={3}>
-                <Grid item xs={12}>
+                <Grid size={12}>
                     <Typography variant="h4">Test Page!!</Typography>
                 </Grid>
-                <Grid item xs={12}>
+                <Grid size={12}>
                     <List>
                         <ListItem component={Link} to="/">
                             <Typography color="primary">Home</Typography>

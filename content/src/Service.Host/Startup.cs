@@ -34,8 +34,9 @@ namespace Linn.Template.Service.Host
             services.AddSqsExtensions();
             services.AddLog();
 
-            services.AddFacade();
             services.AddServices();
+            services.AddFacadeServices();
+            services.AddBuilders();
             services.AddPersistence();
             services.AddHandlers();
             services.AddMessageDispatchers();

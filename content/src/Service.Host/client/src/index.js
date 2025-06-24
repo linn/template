@@ -1,10 +1,7 @@
-﻿/* eslint-disable react/jsx-props-no-spreading */
-
-import React from 'react';
+﻿import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { SnackbarProvider } from 'notistack';
-import { ThemeProvider, StyledEngineProvider } from '@mui/material/styles';
-import { linnTheme } from '@linn-it/linn-form-components-library';
+import { ThemeProvider, StyledEngineProvider, createTheme } from '@mui/material/styles';
 import { AuthProvider } from 'react-oidc-context';
 import { WebStorageStateStore } from 'oidc-client-ts';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -38,12 +35,13 @@ const oidcConfig = {
     userStore: new WebStorageStateStore({ store: window.localStorage })
 };
 
+const theme = createTheme({});
 const render = Component => {
     root.render(
         <BrowserRouter>
             <AuthProvider {...oidcConfig}>
                 <StyledEngineProvider injectFirst>
-                    <ThemeProvider theme={linnTheme}>
+                    <ThemeProvider theme={theme}>
                         <SnackbarProvider dense maxSnack={5}>
                             <LocalizationProvider dateAdapter={AdapterMoment} locale="en-GB">
                                 <Component />

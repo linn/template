@@ -5,17 +5,16 @@ import List from '@mui/material/List';
 import { Grid } from '@mui/material';
 
 import ListItem from '@mui/material/ListItem';
-import Page from './Page';
-import config from '../config';
+import Page from '../containers/Page';
 
 function App() {
     return (
-        <Page homeUrl={config.appRoot}>
+        <Page>
             <Grid container spacing={3}>
-                <Grid item xs={12}>
+                <Grid size={12}>
                     <Typography variant="h4">Template</Typography>
                 </Grid>
-                <Grid item xs={12}>
+                <Grid size={12}>
                     <List>
                         <ListItem component={Link} to="/test">
                             <Typography color="primary">Test Page</Typography>

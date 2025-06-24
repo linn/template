@@ -8,7 +8,7 @@
 
     public static class ServiceExtensions
     {
-        public static IServiceCollection AddFacade(this IServiceCollection services)
+        public static IServiceCollection AddFacadeServices(this IServiceCollection services)
         {
             return services;
         }
@@ -18,6 +18,11 @@
             return services
                 .AddSingleton<IRazorEngine, RazorEngine>()
                 .AddSingleton<ITemplateEngine, RazorTemplateEngine>();
+        }
+
+        public static IServiceCollection AddBuilders(this IServiceCollection services)
+        {
+            return services;
         }
     }
 }
