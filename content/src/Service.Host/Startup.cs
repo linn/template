@@ -5,8 +5,8 @@ namespace Linn.Template.Service.Host
 
     using Linn.Common.Authentication.Host.Extensions;
     using Linn.Common.Logging;
-    using Linn.Common.Service.Core;
-    using Linn.Common.Service.Core.Extensions;
+    using Linn.Common.Service;
+    using Linn.Common.Service.Extensions;
     using Linn.Template.IoC;
     using Linn.Template.Service.Host.Negotiators;
     using Linn.Template.Service.Models;

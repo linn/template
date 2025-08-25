@@ -19,7 +19,7 @@
             return services.AddSingleton<ILog>(
                 l =>
                     {
-                        var sqs = l.GetRequiredService<IAmazonSQS>();
+                        var sqs = l.GetRequiredService<AmazonSQSClient>();
                         return new AmazonSqsLog(
                             sqs,
                             LoggingConfiguration.Environment,

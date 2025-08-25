@@ -7,8 +7,8 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Linn.Common.Configuration" Version="2.0.0" />
-		<PackageReference Include="Linn.Common.Service.Core" Version="1.0.0" />
+		<PackageReference Include="Linn.Common.Configuration" Version="3.0.0" />
+		<PackageReference Include="Linn.Common.Service" Version="1.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>

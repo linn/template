@@ -4,14 +4,21 @@
     using Amazon.Runtime;
     using Amazon.SQS;
 
+
     using Microsoft.Extensions.DependencyInjection;
 
     public static class AmazonSqsExtensions
     {
         public static IServiceCollection AddSqsExtensions(this IServiceCollection services)
         {
-            return services.AddSingleton<IAmazonSQS>(
-                s => new AmazonSQSClient(s.GetService<AWSCredentials>(), s.GetService<RegionEndpoint>()));
+            services.AddSingleton<AmazonSQSClient>(sp =>
+                {
+                    var creds = sp.GetRequiredService<AWSCredentials>();
+                    var region = sp.GetRequiredService<RegionEndpoint>();
+                    return new AmazonSQSClient(creds, region);
+                });
+
+            return services;
         }
     }
 }

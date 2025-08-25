@@ -1,6 +1,6 @@
 ﻿namespace Linn.Template.Service.Modules
 {
-    using Linn.Common.Service.Core;
+    using Linn.Common.Service;
 
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Http;
