@@ -1,4 +1,4 @@
-﻿namespace Linn.Common.Logging.AmazonSqs
+﻿namespace Linn.Template.IoC.Logging.AmazonSQS
 {
     using Models;
 

@@ -1,4 +1,4 @@
-﻿namespace Linn.Template.IoC.Logging.AmazonSQS
+﻿namespace Linn.Template.IoC.Logging.AmazonSQS.Models
 {
     public class AmazonSqsCallerInfo
     {

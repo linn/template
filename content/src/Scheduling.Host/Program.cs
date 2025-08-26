@@ -1,5 +1,7 @@
 using Linn.Common.Scheduling;
 using Linn.Template.IoC;
+using Linn.Template.IoC.Logging.AmazonSQS;
+
 using Scheduling.Host.Jobs;
 
 IHost host = Host.CreateDefaultBuilder(args)
@@ -7,7 +9,7 @@ IHost host = Host.CreateDefaultBuilder(args)
     {
         services.AddLog();
         services.AddCredentialsExtensions();
-        services.AddSqsExtensions();
+        services.AddSQSExtensions();
         services.AddServices();
         services.AddPersistence();
         services.AddRabbitConfiguration();
