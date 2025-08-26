@@ -69,6 +69,7 @@ src/Service.Host/client/build/
 *.nupkg
 
 src/Service.Host/Service.Host.sln
+content/src/Service.Host/Service.Host.sln
 *.idea*
 
 *.DS_STORE*

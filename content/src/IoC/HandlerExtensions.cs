@@ -2,8 +2,7 @@
 {
     using System.Collections.Generic;
 
-    using Linn.Common.Service.Core;
-    using Linn.Common.Service.Core.Handlers;
+    using Linn.Common.Service.Handlers;
     using Linn.Template.Resources;
 
     using Microsoft.Extensions.DependencyInjection;

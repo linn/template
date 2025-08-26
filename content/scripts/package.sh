@@ -1,5 +1,6 @@
 #!/bin/bash
 set -ev
+source ./scripts/install.sh
 
 # build dotnet application
 dotnet publish

@@ -1,4 +1,5 @@
 ﻿using Linn.Template.IoC;
+using Linn.Template.IoC.Logging.AmazonSQS;
 using Linn.Template.Messaging.Host.Jobs;
 
 var host = Host.CreateDefaultBuilder(args)
@@ -8,7 +9,7 @@ var host = Host.CreateDefaultBuilder(args)
             services.AddCredentialsExtensions();
             services.AddServices();
             services.AddPersistence();
-            services.AddSqsExtensions();
+            services.AddSQSExtensions();
             services.AddRabbitConfiguration();
             services.AddMessageHandlers();
             services.AddHostedService<Listener>();

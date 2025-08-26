@@ -1,13 +1,7 @@
 #!/bin/bash
 set -ev
 
-# upgrade node to latest version
-if [ "$CI" ] && [ "$TRAVIS" ]
-then 
-	source ~/.nvm/nvm.sh; 
-	nvm install 20;
-	nvm use 20;
-fi
+source ./scripts/install.sh
 
 # c# tests
 dotnet test ./tests/Unit/Domain.Tests/Domain.Tests.csproj

@@ -1,4 +1,4 @@
-﻿namespace Linn.Template.IoC
+﻿namespace Linn.Template.IoC.Logging.AmazonSQS
 {
     using Amazon;
     using Amazon.Runtime;
@@ -8,7 +8,7 @@
 
     public static class AmazonSqsExtensions
     {
-        public static IServiceCollection AddSqsExtensions(this IServiceCollection services)
+        public static IServiceCollection AddSQSExtensions(this IServiceCollection services)
         {
             return services.AddSingleton<IAmazonSQS>(
                 s => new AmazonSQSClient(s.GetService<AWSCredentials>(), s.GetService<RegionEndpoint>()));

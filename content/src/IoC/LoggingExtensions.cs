@@ -5,7 +5,6 @@
     using Amazon.SQS;
 
     using Linn.Common.Logging;
-    using Linn.Common.Logging.AmazonSqs;
 
     using Microsoft.Extensions.DependencyInjection;
 
@@ -19,7 +18,7 @@
             return services.AddSingleton<ILog>(
                 l =>
                     {
-                        var sqs = l.GetRequiredService<IAmazonSQS>();
+                        var sqs = l.GetRequiredService<AmazonSQSClient>();
                         return new AmazonSqsLog(
                             sqs,
                             LoggingConfiguration.Environment,
