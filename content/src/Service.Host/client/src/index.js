@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client';
 import { SnackbarProvider } from 'notistack';
 import { ThemeProvider, StyledEngineProvider, createTheme } from '@mui/material/styles';
 import { AuthProvider } from 'react-oidc-context';
+import CssBaseline from '@mui/material/CssBaseline';
 import { WebStorageStateStore } from 'oidc-client-ts';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { BrowserRouter } from 'react-router-dom';
@@ -21,7 +22,7 @@ const oidcConfig = {
     client_id: 'app2',
     response_type: 'code',
     scope: 'openid profile email associations',
-    redirect_uri: `${host}/template`,
+    redirect_uri: `${host}/template/`,
     post_logout_redirect_uri: `${config.proxyRoot}/authentication/Account/Logout`,
     onSigninCallback: () => {
         const redirect = sessionStorage.getItem('auth:redirect');
@@ -40,6 +41,8 @@ const render = Component => {
     root.render(
         <BrowserRouter>
             <AuthProvider {...oidcConfig}>
+                <CssBaseline />
+
                 <StyledEngineProvider injectFirst>
                     <ThemeProvider theme={theme}>
                         <SnackbarProvider dense maxSnack={5}>

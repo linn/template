@@ -1,11 +1,9 @@
 ﻿import React from 'react';
 import { Route, Routes, Navigate } from 'react-router-dom';
-import useSignIn from '../hooks/useSignIn';
+import { useSignIn } from '@linn-it/linn-form-components-library';
 import Navigation from '../containers/Navigation';
 import App from './App';
 import 'typeface-roboto';
-import NotFoundPage from './NotFoundPage';
-import TestPage from './TestPage';
 
 function Root() {
     useSignIn();
@@ -17,8 +15,6 @@ function Root() {
                 <Routes>
                     <Route path="/" element={<Navigate to="/template" replace />} />
                     <Route path="/template" element={<App />} />
-                    <Route path="/test" element={<TestPage />} />
-                    <Route path="*" element={<NotFoundPage />} />
                 </Routes>
             </div>
         </div>
