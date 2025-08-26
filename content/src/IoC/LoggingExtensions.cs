@@ -5,7 +5,6 @@
     using Amazon.SQS;
 
     using Linn.Common.Logging;
-    using Linn.Common.Logging.AmazonSqs;
 
     using Microsoft.Extensions.DependencyInjection;
 

@@ -8,6 +8,7 @@ namespace Linn.Template.Service.Host
     using Linn.Common.Service;
     using Linn.Common.Service.Extensions;
     using Linn.Template.IoC;
+    using Linn.Template.IoC.Logging.AmazonSQS;
     using Linn.Template.Service.Host.Negotiators;
     using Linn.Template.Service.Models;
 
@@ -31,7 +32,7 @@ namespace Linn.Template.Service.Host
             services.AddSingleton<IResponseNegotiator, UniversalResponseNegotiator>();
 
             services.AddCredentialsExtensions();
-            services.AddSqsExtensions();
+            services.AddSQSExtensions();
             services.AddLog();
 
             services.AddServices();
