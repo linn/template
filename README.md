@@ -8,7 +8,7 @@ Install: `dotnet new -i Linn.Template`
 
 Create new solution: `dotnet new linntemplate -n {namespace} -s {solutionFileName}` 
 
-e.g. `dotnet new Linn.Template -n Linn.Events -s Events.sln`
+e.g. `dotnet new linntemplate -n Linn.Events -s Events.sln`
 
 ### To publish an updated template:
 
