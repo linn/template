@@ -20,6 +20,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+  	<PackageReference Include="AWSSDK.Core" Version="4.0.3.3" />
 	  <Folder Include="ResultHandlers\" />
 	</ItemGroup>
 
