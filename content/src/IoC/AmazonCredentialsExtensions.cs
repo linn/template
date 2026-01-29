@@ -2,6 +2,7 @@
 {
     using Amazon;
     using Amazon.Runtime;
+    using Amazon.Runtime.Credentials;
 
     using Linn.Common.Configuration;
 
@@ -15,7 +16,7 @@
             AWSConfigs.AWSProfileName = "mfa";
 #endif
             return services
-                .AddSingleton<AWSCredentials>(s => FallbackCredentialsFactory.GetCredentials())
+                .AddSingleton<AWSCredentials>(s => DefaultAWSCredentialsIdentityResolver.GetCredentials())
                 .AddSingleton<RegionEndpoint>(a => RegionEndpoint.GetBySystemName(AwsCredentialsConfiguration.Region));
         }
     }
