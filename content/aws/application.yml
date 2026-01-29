@@ -72,6 +72,11 @@ Conditions:
     - !Equals [!Ref environmentSuffix, "-sys"]
 
 Resources:
+  TemplateStackLogGroup:
+    Type: AWS::Logs::LogGroup
+    DeletionPolicy: Delete
+    Properties:
+      RetentionInDays: 14
   templateRole:
     Type: AWS::IAM::Role
     Properties:
@@ -151,10 +156,11 @@ Resources:
             traefik.http.routers.template.rule: "PathPrefix(`/template`)"
             traefik.http.services.template.loadbalancer.healthcheck.path: "/healthcheck"
           LogConfiguration:
-            LogDriver: gelf
+            LogDriver: awslogs
             Options:
-              'gelf-address': 'udp://syslog.linn.co.uk:12201'
-              'tag': !Sub template-${dockerTag}-ecs-task
+              awslogs-region: !Ref AWS::Region
+              awslogs-group: !Ref TemplateStackLogGroup
+              awslogs-stream-prefix: !Ref AWS::StackName
           Environment:
             - Name: DATABASE_HOST
               Value: !Ref databaseHost
