@@ -31,6 +31,10 @@ LAST_TRAVIS_BUILD_NUMBER="${LAST_TRAVIS_BUILD_NUMBER:-0}"
 BUILD_NUMBER=$((LAST_TRAVIS_BUILD_NUMBER + GITHUB_RUN_NUMBER))
 
 docker build --no-cache -t linn/template:$BUILD_NUMBER --build-arg gitBranch=$GIT_BRANCH ./src/Service.Host/
+# docker build --no-cache -t linn/template-messaging:$BUILD_NUMBER --build-arg gitBranch=$GIT_BRANCH ./src/Messaging.Host/
+# docker build --no-cache -t linn/template-scheduling:$BUILD_NUMBER --build-arg gitBranch=$GIT_BRANCH ./src/Scheduling.Host/
 
 # push to dockerhub 
 docker push linn/template:$BUILD_NUMBER
+# docker push linn/template-messaging:$BUILD_NUMBER
+# docker push linn/template-scheduling:$BUILD_NUMBER
