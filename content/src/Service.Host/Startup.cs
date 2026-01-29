@@ -8,10 +8,10 @@ namespace Linn.Template.Service.Host
     using Linn.Common.Service;
     using Linn.Common.Service.Extensions;
     using Linn.Template.IoC;
-    using Linn.Template.IoC.Logging.AmazonSQS;
     using Linn.Template.Service.Host.Negotiators;
     using Linn.Template.Service.Models;
 
+    using Microsoft.AspNetCore.Authentication.JwtBearer;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Diagnostics;
     using Microsoft.AspNetCore.Hosting;
@@ -19,6 +19,7 @@ namespace Linn.Template.Service.Host
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.FileProviders;
     using Microsoft.Extensions.Hosting;
+    using Microsoft.Extensions.Logging;
 
     public class Startup
     {
@@ -32,7 +33,14 @@ namespace Linn.Template.Service.Host
             services.AddSingleton<IResponseNegotiator, UniversalResponseNegotiator>();
 
             services.AddCredentialsExtensions();
-            services.AddSQSExtensions();
+            services.AddLogging(builder =>
+            {
+                builder.ClearProviders();
+                builder.AddConsole();
+                builder.AddFilter("Microsoft", LogLevel.Warning);
+                builder.AddFilter("System", LogLevel.Warning);
+                builder.AddFilter("Linn", LogLevel.Information);
+            });
             services.AddLog();
 
             services.AddServices();
@@ -42,13 +50,28 @@ namespace Linn.Template.Service.Host
             services.AddHandlers();
             services.AddMessageDispatchers();
 
-            services.AddLinnAuthentication(
-                options =>
+            var appSettings = ApplicationSettings.Get();
+
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+                .AddJwtBearer(options =>
+                {
+                    options.Authority = appSettings.CognitoHost;
+                    options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
                     {
-                        options.Authority = ApplicationSettings.Get().AuthorityUri;
-                        options.CallbackPath = new PathString("/template/signin-oidc");
-                        options.CookiePath = "/template";
-                    });
+                        ValidateIssuer = true,
+                        ValidIssuer = appSettings.CognitoHost,
+                        ValidateAudience = false,
+                        ValidAudience = appSettings.CognitoClientId,
+                        ValidateLifetime = true,
+                        ValidateIssuerSigningKey = true
+                    };
+                });
+
+            services.AddAuthorization();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -59,18 +82,18 @@ namespace Linn.Template.Service.Host
             {
                 app.UseDeveloperExceptionPage();
                 app.UseStaticFiles(new StaticFileOptions
-                                       {
-                                           RequestPath = "/template/build",
-                                           FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "client", "build"))
-                                       });
+                {
+                    RequestPath = "/template/build",
+                    FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "client", "build"))
+                });
             }
             else
             {
                 app.UseStaticFiles(new StaticFileOptions
-                                       {
-                                           RequestPath = "/template/build",
-                                           FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "app", "client", "build"))
-                                       });
+                {
+                    RequestPath = "/template/build",
+                    FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "app", "client", "build"))
+                });
             }
 
             app.UseAuthentication();
@@ -78,23 +101,23 @@ namespace Linn.Template.Service.Host
             app.UseBearerTokenAuthentication();
             app.Use(
                 (context, next) =>
-                    {
-                        context.Response.Headers.Append("Vary", "Accept");
-                        return next.Invoke();
-                    });
+                {
+                    context.Response.Headers.Append("Vary", "Accept");
+                    return next.Invoke();
+                });
             app.UseExceptionHandler(
                 c => c.Run(async context =>
-                    {
-                        var exception = context.Features
-                            .Get<IExceptionHandlerPathFeature>()
-                            ?.Error;
+                {
+                    var exception = context.Features
+                        .Get<IExceptionHandlerPathFeature>()
+                        ?.Error;
 
-                        var log = app.ApplicationServices.GetService<ILog>();
-                        log.Error(exception?.Message, exception);
+                    var log = app.ApplicationServices.GetService<ILog>();
+                    log.Error(exception?.Message, exception);
 
-                        var response = new { error = $"{exception?.Message}  -  {exception?.StackTrace}" };
-                        await context.Response.WriteAsJsonAsync(response);
-                    }));
+                    var response = new { error = $"{exception?.Message}  -  {exception?.StackTrace}" };
+                    await context.Response.WriteAsJsonAsync(response);
+                }));
             app.UseRouting();
             app.UseEndpoints(builder => { builder.MapEndpoints(); });
         }

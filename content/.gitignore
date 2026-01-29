@@ -77,3 +77,4 @@ local-update.sh
 
 
 .\src\Service.Host\Service.Host.sln
+/src/Service.Host/Service.Host.sln

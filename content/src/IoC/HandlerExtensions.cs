@@ -1,9 +1,7 @@
 ﻿namespace Linn.Template.IoC
 {
-    using System.Collections.Generic;
-
+    using Linn.Common.Resources;
     using Linn.Common.Service.Handlers;
-    using Linn.Template.Resources;
 
     using Microsoft.Extensions.DependencyInjection;
 
