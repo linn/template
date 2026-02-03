@@ -2,25 +2,39 @@
 set -ev
 source ./scripts/install.sh
 
+# build the client app
+cd ./src/Service.Host
+npm ci
+BUILD_ENV=production npm run build
+cd ../..
+
 # build dotnet application
 dotnet publish
 # dotnet publish ./src/Messaging.Host/ -c release
 # dotnet publish ./src/Scheduling.Host/ -c release
 
 # determine which branch this change is from
-if [ "${TRAVIS_PULL_REQUEST}" = "false" ]; then
-  GIT_BRANCH=$TRAVIS_BRANCH
-else
-  GIT_BRANCH=$TRAVIS_PULL_REQUEST_BRANCH
+if [ -n "${GITHUB_HEAD_REF}" ]; then
+  # GitHub Actions PR
+  GIT_BRANCH=$GITHUB_HEAD_REF
+elif [ -n "${GITHUB_REF_NAME}" ]; then
+  # GitHub Actions push
+  GIT_BRANCH=$GITHUB_REF_NAME
 fi
 
 # create docker image(s)
+echo "DOCKER_HUB_USERNAME is: $DOCKER_HUB_USERNAME"
 docker login -u $DOCKER_HUB_USERNAME -p $DOCKER_HUB_PASSWORD
-docker build --no-cache -t linn/template:$TRAVIS_BUILD_NUMBER --build-arg gitBranch=$GIT_BRANCH ./src/Service.Host/
-# docker build --no-cache -t linn/template-messaging:$TRAVIS_BUILD_NUMBER --build-arg gitBranch=$GIT_BRANCH ./src/Messaging.Host/
-# docker build --no-cache -t linn/template-scheduling:$TRAVIS_BUILD_NUMBER --build-arg gitBranch=$GIT_BRANCH ./src/Scheduling.Host/
+
+# Use continuous build number (Travis + GitHub Actions)
+LAST_TRAVIS_BUILD_NUMBER="${LAST_TRAVIS_BUILD_NUMBER:-0}"
+BUILD_NUMBER=$((LAST_TRAVIS_BUILD_NUMBER + GITHUB_RUN_NUMBER))
+
+docker build --no-cache -t linn/template:$BUILD_NUMBER --build-arg gitBranch=$GIT_BRANCH ./src/Service.Host/
+# docker build --no-cache -t linn/template-messaging:$BUILD_NUMBER --build-arg gitBranch=$GIT_BRANCH ./src/Messaging.Host/
+# docker build --no-cache -t linn/template-scheduling:$BUILD_NUMBER --build-arg gitBranch=$GIT_BRANCH ./src/Scheduling.Host/
 
 # push to dockerhub 
-docker push linn/template:$TRAVIS_BUILD_NUMBER
-# docker push linn/template-messaging:$TRAVIS_BUILD_NUMBER
-# docker push linn/template-scheduling:$TRAVIS_BUILD_NUMBER
+docker push linn/template:$BUILD_NUMBER
+# docker push linn/template-messaging:$BUILD_NUMBER
+# docker push linn/template-scheduling:$BUILD_NUMBER

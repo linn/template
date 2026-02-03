@@ -8,7 +8,7 @@ function App() {
         <Page>
             <Grid container spacing={3}>
                 <Grid size={12}>
-                    <Typography variant="h4">Template</Typography>
+                    <Typography variant="h4">Template OK</Typography>
                 </Grid>
             </Grid>
         </Page>

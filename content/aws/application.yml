@@ -11,9 +11,6 @@ Parameters:
   proxyRoot:
     Type: String
     Description: proxy root
-  authorityUri:
-    Type: String
-    Description: OIDC authority uri
   databaseHost:
     Type: String
     Description: Database host
@@ -38,12 +35,18 @@ Parameters:
   rabbitPassword:
     Type: String
     Description: Rabbit password
-  loggingEnvironment:
+  cognitoHost:
     Type: String
-    Description: Logging Environment
-  loggingMaxInnerExceptionDepth:
-    Type: Number
-    Description: Logging Max Inner Exception Depth
+    Description: Cognito host
+  cognitoClientId:
+    Type: String
+    Description: Cognito client id
+  cognitoDomainPrefix:
+    Type: String
+    Description: Cognito domain prefix
+  entraLogoutUri:
+    Type: String
+    Description: Entra logout uri
   pdfServiceRoot:
     Type: String
     Description: Pdf Service API root url
@@ -69,6 +72,11 @@ Conditions:
     - !Equals [!Ref environmentSuffix, "-sys"]
 
 Resources:
+  TemplateStackLogGroup:
+    Type: AWS::Logs::LogGroup
+    DeletionPolicy: Delete
+    Properties:
+      RetentionInDays: 14
   templateRole:
     Type: AWS::IAM::Role
     Properties:
@@ -148,10 +156,11 @@ Resources:
             traefik.http.routers.template.rule: "PathPrefix(`/template`)"
             traefik.http.services.template.loadbalancer.healthcheck.path: "/healthcheck"
           LogConfiguration:
-            LogDriver: gelf
+            LogDriver: awslogs
             Options:
-              'gelf-address': 'udp://syslog.linn.co.uk:12201'
-              'tag': !Sub template-${dockerTag}-ecs-task
+              awslogs-region: !Ref AWS::Region
+              awslogs-group: !Ref TemplateStackLogGroup
+              awslogs-stream-prefix: !Ref AWS::StackName
           Environment:
             - Name: DATABASE_HOST
               Value: !Ref databaseHost
@@ -173,16 +182,8 @@ Resources:
               Value: !Ref appRoot
             - Name: PROXY_ROOT
               Value: !Ref proxyRoot
-            - Name: AUTHORITY_URI
-              Value: !Ref authorityUri
             - Name: BUILD_NUMBER
               Value: !Ref dockerTag
-            - Name: LOG_AMAZON_SQSQUEUEURI
-              Value: !ImportValue logging-queue-url
-            - Name: LOG_ENVIRONMENT
-              Value: !Ref loggingEnvironment
-            - Name: LOG_MAX_INNER_EXCEPTION_DEPTH
-              Value: !Ref loggingMaxInnerExceptionDepth
             - Name: PDF_SERVICE_ROOT
               Value: !Ref pdfServiceRoot
             - Name: awsRegion
@@ -239,12 +240,6 @@ Resources:
   #             Value: !Ref appRoot
   #           - Name: PROXY_ROOT
   #             Value: !Ref proxyRoot
-  #           - Name: LOG_AMAZON_SQSQUEUEURI
-  #             Value: !ImportValue logging-queue-url
-  #           - Name: LOG_ENVIRONMENT
-  #             Value: !Ref loggingEnvironment
-  #           - Name: LOG_MAX_INNER_EXCEPTION_DEPTH
-  #             Value: !Ref loggingMaxInnerExceptionDepth
   #           - Name: awsRegion
   #             Value: !Ref AWS::Region
   templateService:
